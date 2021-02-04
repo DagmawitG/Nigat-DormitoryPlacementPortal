@@ -1,0 +1,17 @@
+.navbar {
+    margin-bottom: 20px;
+    
+  }
+  
+.nav-link {
+    color: white;
+    
+}
+
+nav ul li a:hover{
+    color: rgb(219, 228, 203);
+}
+
+ul{
+    list-style: none;
+}

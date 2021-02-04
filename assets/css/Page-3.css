@@ -90,10 +90,12 @@
 .u-section-1 .u-image-2 {
   width: 308px;
   height: 308px;
-  background-image: url("images/7.jpg");
+  background-image: url("assets/images/7.jpg");
   background-position: 50% 50%;
   margin: 0 auto 0 0;
 }
+
+
 
 .u-section-1 .u-text-7 {
   text-transform: uppercase;
@@ -143,7 +145,7 @@
 .u-section-1 .u-image-3 {
   width: 308px;
   height: 308px;
-  background-image: url("images/4.jpg");
+  background-image: url("assets/images/4.jpg");
   background-position: 50% 50%;
   margin: 0 auto 0 0;
 }

@@ -1,11 +1,12 @@
 
 /* BASIC */
 
-html {
+/* html {
     background-color: #56baed;
   }
-  
+   */
   body {
+    background-image: linear-gradient(rgba(255,0,0,0), rgb(195, 199, 221));
     font-family: "Poppins", sans-serif;
     height: 100vh;
   }

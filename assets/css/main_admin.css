@@ -1,0 +1,27 @@
+body{
+    margin: 0px 150px 150px;
+    margin-top: 40px;
+    background-color: grey;
+}
+nav{
+    box-shadow : 5px 8px #7a7676;
+    border-radius: 20px;
+}
+.jumbotron{
+    margin-top: 45px;
+    box-shadow : 5px 8px #7a7676;
+    border-radius: 20px;
+    justify-content: center;
+}
+img{   
+    border-radius: 100%; 
+    border-style: hidden;    
+    width : 250px;    
+    height : 250px;    
+    margin : 10px 15px 0px 15px; 
+    /* margin-left: 10rem; */
+}
+.para{
+    text-align: center;
+    font-size: 15px;
+}

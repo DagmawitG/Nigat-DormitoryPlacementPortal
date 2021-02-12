@@ -1,0 +1,74 @@
+.list-item{
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    float: left;
+    margin-bottom: -25px;
+    width: calc( 33.33333333% - 34px );
+    margin-right: 50px;
+}
+
+.card{
+    border: none;
+    margin: 3em;
+}
+
+.card-body{
+    margin-top: 2em;
+    padding: 0;
+    
+
+}
+.card-date{
+    font-family: sofia-pro;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #222;
+    padding: 1.5em 0;
+}
+
+.card-title{
+    font-family: ltc-bodoni-175;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 35px;
+    letter-spacing: .03em;
+    line-height: 1em;
+    text-transform: none;
+    text-decoration: none;
+    color: #222;
+    -webkit-box-ordinal-group: 3;
+    margin-bottom: 25px;
+    order: 3;
+}
+
+
+
+.row-left{
+    margin-left: 1em;
+    
+}
+.row-right{
+    margin-right: 1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

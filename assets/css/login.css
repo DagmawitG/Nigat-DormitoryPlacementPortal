@@ -6,6 +6,11 @@ html {
   }
   
   body {
+<<<<<<< HEAD
+=======
+    background-color: rgb(255, 255, 255);
+    /* background-image: linear-gradient(rgba(255,0,0,0), rgb(195, 199, 221)); */
+>>>>>>> 606ed0f4fd02ca14ebf967c2e89975c061b2a41a
     font-family: "Poppins", sans-serif;
     height: 100vh;
   }

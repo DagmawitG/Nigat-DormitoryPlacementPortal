@@ -7,12 +7,13 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     
     <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/welcome.css">
 
 </head>
 <body>
     
     
-    <div class="wrapper fadeInDown">
+    <div class="wrapper fadeInDown bg-info">
       <div id="formContent">
         <!-- Tabs Titles -->
     
@@ -23,10 +24,11 @@
     
         <!-- Login Form -->
         <form>
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-          <input type="submit" class="fadeIn fourth" value="Log In">
-        </form>
+            <input type="text" id="loginuser" class="fadeIn second" name="login" placeholder="ID">
+            <input type="text" id="passworduser" class="fadeIn third" name="login" placeholder="password">
+            <p id="incorrect"></p>
+            <button   id="loginuser_btn" value="Log In" >Login</button>
+          </form>
     
         <!-- Remind Passowrd -->
         <div id="formFooter">
@@ -38,6 +40,6 @@
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <script src="./assets/js/login_user.js"></script>
 </body>
 </html>

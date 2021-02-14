@@ -5,7 +5,7 @@
     
 }
 body{
-    background: #bdd5e0;
+    background: white;
     color:#555555 ;
     font-size: 14px;
 
@@ -23,6 +23,7 @@ body{
 .wrapper{
     margin: 20px 0px 20px 20px;
     width: 100%;
+    
    
     
 
@@ -33,6 +34,7 @@ body{
     flex-wrap:wrap ;
     
     
+    
 
 
 }
@@ -41,6 +43,8 @@ body{
     padding: 10px;
     margin-left: 100px;
     margin-bottom: 40px;
+    border: solid lightgray;
+    background-color: lightgray;
    
     
 

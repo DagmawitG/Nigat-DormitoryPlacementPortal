@@ -1,22 +1,19 @@
-.btn-white{
-    background-color: white;
-    color: black;
-    padding-right: 6rem;
-    
+.btn-white {
+  background-color: white;
+  color: black;
+  padding-right: 6rem;
 }
-.color-white{
-    background-color: white;
-    color: black;
-    height: 5rem;
-    margin: 2rem;
-    padding: 1.5rem;
-    box-shadow: 3px 3px rgb(49, 47, 47);
-    
+.color-white {
+  background-color: white;
+  color: black;
+  height: 5rem;
+  margin: 2rem;
+  padding: 1.5rem;
+  box-shadow: 3px 3px rgb(49, 47, 47);
 }
-.first{
-    margin-left: 7rem; 
+.first {
+  margin-left: 7rem;
 }
-.table{
-    background-color: white;
+.table {
+  background-color: white;
 }
-

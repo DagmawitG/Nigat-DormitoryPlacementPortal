@@ -84,3 +84,24 @@ function compareNandD(a, b) {
     }
     return a.Year > b.Year ? 1 : -1;
   }
+
+  function compareNames(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  }
+  
+  //function to sort students  based on their department
+  function compareDepartment(a, b) {
+    if (a.department < b.department) {
+      return -1;
+    }
+    if (a.department > b.department) {
+      return 1;
+    }
+    return 0;
+  }

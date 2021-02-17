@@ -98,10 +98,19 @@ function compareNandD(a, b) {
   //function to sort students  based on their department
   function compareDepartment(a, b) {
     if (a.department < b.department) {
-      return -1;
+      a.name = b.name
+      return
     }
     if (a.department > b.department) {
-      return 1;
+      b.name = a.name
+      return
     }
     return 0;
+  }
+
+  //function to clone an Array
+function cloneArray(oArray, cArray) {
+    cArray = [];
+    cArray = oArray.map((a) => Object.assign({}, a));
+    return cArray;
   }

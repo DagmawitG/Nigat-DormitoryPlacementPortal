@@ -77,3 +77,10 @@ let fbe = 10; //Number of available dorm spaces in fbe
 let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
 let skilopd = 2; //Number of students assigned per dorm at 6-kilo
 let fbepd = 2; //Number of students assigned per dorm at fbe
+
+function compareNandD(a, b) {
+    if (a.Year === b.Year) {
+      return b.department - a.department;
+    }
+    return a.Year > b.Year ? 1 : -1;
+  }

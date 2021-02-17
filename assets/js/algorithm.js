@@ -70,3 +70,10 @@ let students = [
       department: "biomedical",
     },
   ];
+
+let fkilo = 4; //Number of available dorm spaces in 5-kilo
+let skilo = 30; // Number of available dorm spaces in 6-kilo
+let fbe = 10; //Number of available dorm spaces in fbe
+let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
+let skilopd = 2; //Number of students assigned per dorm at 6-kilo
+let fbepd = 2; //Number of students assigned per dorm at fbe

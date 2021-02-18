@@ -112,3 +112,37 @@ function cloneArray(oArray, cArray) {
     cArray = oArray.map((a) => Object.assign({}, a));
     return cArray;
   }
+
+students.sort(compareNames); //sort the student list alphabetically
+
+// Filter out students who are 5th year to be assigned to 5-kilo
+var fkilo_students = [];
+var rStudents = []; //remaining students who haven't been assigned yet
+for (var i = 0; i < students.length; i++) {
+  if (students[i].Year == 5 && fkilo_students.length < fkilo) {
+    fkilo_students.push(students[i]);
+  } else {
+    rStudents.push(students[i]);
+  }
+}
+
+students = cloneArray(rStudents, students);
+students.sort(compareNames);
+rStudents = []
+
+// Check if there are spaces left in 5-kilo after 5th years have been assigned
+if (fkilo - fkilo_students.length > 0) {
+    let spacesLeft = fkilo - fkilo_students.length;
+    for (var i = 0; i < students.length; i++) {
+      if (spacesLeft > 0) {
+        if (students[i].Year == 4) {
+          fkilo_students.push(students[i]);
+          spacesLeft--;
+        } else {
+          rStudents.push(students[i]);
+        }
+      } else {
+        rStudents.push(students[i]);
+      }
+    }
+  }

@@ -98,12 +98,10 @@ function compareNandD(a, b) {
   //function to sort students  based on their department
   function compareDepartment(a, b) {
     if (a.department < b.department) {
-      a.name = b.name
-      return
+      return -1;
     }
     if (a.department > b.department) {
-      b.name = a.name
-      return
+      return 1;
     }
     return 0;
   }

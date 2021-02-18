@@ -146,3 +146,39 @@ if (fkilo - fkilo_students.length > 0) {
       }
     }
   }
+
+  let mStudents = [];
+let fStudents = [];
+students = cloneArray(rStudents, students);
+
+//list out female and male students who aren't assigned yet
+for (var i = 0; i < students.length; i++) {
+  if (students[i].sex == "M") {
+    mStudents.push(students[i]); //male students assigned to 6-kilo
+  } else {
+    fStudents.push(students[i]); //female students assigned to FBE
+  }
+}
+
+mStudents.sort(compareNandD); // to be assigned at 6-kilo
+fStudents.sort(compareNandD); // to be assigned at fbe
+console.log(mStudents);
+console.log(fStudents);
+console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
+
+//assign each students to dorms in 5-kilo
+fiveKiloStudents = assign(fkilo_students, fkilopd);
+fbeStudents = assign(fStudents, fbepd);
+sixKiloStudents = assign(mStudents, skilopd);
+
+console.log(fiveKiloStudents);
+console.log(fbeStudents);
+console.log(sixKiloStudents);
+
+//function to assign each student to their dorms
+function assign(list, pd) {
+    let newArray = [];
+    while (list.length) newArray.push(list.splice(0, pd));
+    return newArray;
+  }
+  

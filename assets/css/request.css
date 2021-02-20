@@ -1,0 +1,216 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#body{
+    background-color: white;
+    background-position: center;
+    background-size: cover;
+    font-family: sans-serif;
+    margin-top: 40px;
+
+
+}
+
+
+
+.regform{
+    width: 1000px;
+    background-color: rgb(122, 192, 201);
+    margin: auto;
+    color: #000000;
+    text-align: center;
+    border-radius:15px 15px 0px 0px;
+    box-sizing: border-box;
+    box-shadow: rgba(0,0 , 0,0.6);
+}
+.main{
+    background-color: rgba(115, 141, 145, 0.5);
+    width: 1000px;
+    margin: auto;
+    box-shadow: rgba(0,0 , 0,0.6);
+}
+form{
+    padding: 70px;
+    width: 100%;
+    height: 100%;
+}
+#name{
+    margin-left:25px ;
+    margin-top: 30px;
+    width: 125px;
+    color: #000000;
+    font-size:18px ;
+    font-weight: 700;
+
+}
+.fullname{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+    width: 355px;
+    
+    
+}
+
+
+.id{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    width: 355px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+    line-height: 40px;
+    
+    border-radius: 6px;
+ 
+}
+.email{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+    line-height: 40px;
+    width: 355px;
+    border-radius: 6px;
+ 
+}
+.code{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    padding: 0 22px;
+    width: 60px;
+    font-size: 16px;
+    color: #555;
+    line-height: 40px;
+    
+    border-radius: 6px;
+ 
+}
+.number{
+    position: relative;
+    left: 250px;
+    top: -37px;
+    padding: 0 22px;
+    font-size: 16px;
+    color: #555;
+    line-height: 40px;
+    
+    border-radius: 6px;
+ 
+}
+.address{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    padding: 0 22px;
+    width: 150px;
+    font-size: 16px;
+    color: #555;
+    line-height: 40px;
+    
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-right: 10px;
+ 
+}
+.option{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    width: 415px;
+    padding: 0 22px;
+    font-size: 16px;
+    height: 40px;
+    color: #555;
+    line-height: 40px;
+    outline: none;
+    overflow: hidden;
+    
+    border-radius: 6px;
+ 
+}
+.options{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    width: 205px;
+    padding: 0 22px;
+    font-size: 16px;
+    height: 40px;
+    color: #555;
+    line-height: 40px;
+    outline: none;
+    overflow: hidden;
+    
+    border-radius: 6px;
+ 
+}
+.option option{
+    font-size: 20px;
+}
+
+
+.radio{
+    display: inline-block;
+    padding-right: 70px;
+    font-size:20px ;
+    margin-left: 25px;
+    margin-top: 15px;
+    margin-bottom:30px ;
+   
+
+}
+
+.radio input{
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    
+
+}
+.description{
+    position: relative;
+    left: 200px;
+    top: -37px;
+    width: 360px;
+    padding: 0 22px;
+    font-size: 16px;
+    
+    color: #555;
+    line-height: 40px;
+    outline: none;
+    overflow: hidden;
+    
+    border-radius: 6px;
+    font-family: sans-serif;
+
+}
+button{
+    background-color: cornflowerblue;
+   position: relative;
+   right: 150px;
+   top: 50px; 
+    
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid gray;
+    padding: 14px 110px;
+    outline: none;
+    color: black;
+    cursor: pointer;
+    transition: 0.25px;
+    font-size: 20px;
+
+}

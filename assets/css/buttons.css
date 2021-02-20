@@ -1,0 +1,96 @@
+.u-btn {
+  border-radius: 4px !important;
+  color: #111111;
+   border-width: 0;
+  border-radius: 4px;
+  /*display: inline-block;*/
+  display: table;
+  /*TODO maye need another solution for negative marin*/
+  cursor: pointer;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  border: 0 none transparent;
+  outline-width: 0;
+  background-color: transparent;
+  margin: 0;
+  -webkit-text-decoration-skip: objects;
+  font-style: initial;
+  white-space: nowrap;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  vertical-align: middle;
+  text-align: center;
+  padding: 10px 30px;
+  border-radius: 0;
+  align-self: flex-start;
+  color: #ffffff !important;
+}
+.u-btn:focus,
+.u-btn:active:focus,
+.u-btn.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.u-btn:hover,
+.u-btn:focus {
+  text-decoration: none;
+}
+.u-btn:active,
+.u-btn.active {
+  outline: 0;
+  background-image: none;
+}
+.u-btn.disabled,
+.u-btn[disabled] {
+  opacity: 0.6;
+}
+
+.u-btn ,
+{
+  position: relative;
+  display: inline;
+  line-height: inherit;
+  font-size: 1em;
+  fill: currentColor;
+  vertical-align: middle;
+  white-space: nowrap;
+
+}
+
+.u-btn {
+  white-space: nowrap;
+  display: inline;
+}
+
+.u-btn-5 {
+  background-image: linear-gradient(to right, #569de6, #1fba95);
+  border-style: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9375rem;
+  letter-spacing: 1px;
+  box-shadow: 0px 2px 6px 0 rgba(0,0,0,0.25);
+  margin: 20px 347px 0;
+  padding: 8px 36px 9px 35px;
+}
+
+.u-btn-6 {
+  background-image: linear-gradient(to right, #569de6, #1fba95);
+  border-style: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9375rem;
+  letter-spacing: 1px;
+  box-shadow: 0px 2px 6px 0 rgba(0,0,0,0.25);
+  margin: -39px 81px 0 auto;
+  padding: 8px 36px 9px 35px;
+}

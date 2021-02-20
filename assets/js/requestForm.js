@@ -164,6 +164,71 @@ var databaseName = 'ContactsDB';
             createFakeContacts();
         };
 
+        contactsDB.readWrite([ contactsStoreName ], function(tx) {
+            var contact = {
+                name: name,
+                email: email,
+                desc: desc
+            };
+
+            tx.objectStore(contactsStoreName).put(contact);
+
+            addContactToTable(contact);    
+        
+            /* function displayTaskList() {
+                // clear the previous task list
+                
+        
+                // create the object store
+                let objectStore = DB.transaction('tasks').objectStore('tasks');
+        
+        
+         */
+                let index = objectStore.index("date");
+                index.openCursor(contactsDB, contactsStoreName).onsuccess = function (e) {
+                    // assign the current cursor
+                    let cursor = e.target.result;
+                    let cardContent = document.getElementById('name1');
+                    cardContent.innerHTML = (contact,1);
+                   
+                /*     if (cursor) {
+                        
+                        // Create an li element when the user adds a task 
+                        const li = document.createElement('li');
+                        //add Attribute for delete 
+                        li.setAttribute('data-task-id', cursor.value.id);
+                        // Adding a class
+                        li.className = 'collection-item';
+                        // Create text node and append it 
+                        li.appendChild(document.createTextNode(cursor.value.taskname));
+                        li.value = cursor.value.date;
+                        // Create new element for the link 
+                        const link = document.createElement('a');
+                        // Add class and the x marker for a 
+                        link.className = 'delete-item secondary-content';
+                        link.innerHTML = `
+                        <i class="fa fa-remove"></i>
+                        &nbsp;
+                        <a href="edit.html?id=${cursor.value.id}"><i class="fa fa-edit"></i> </a>
+                        `;
+                        // Append link to li
+                        li.appendChild(link);
+                        // Append to UL 
+                        taskList.appendChild(li);
+                        cursor.continue();
+                    }
+                }
+            } */
+        let cardContent = document.getElementById('name1');
+        cardContent.innerHTML =  contactss;
+        let departmentNode = cardContent.nextElementSibling;
+        departmentNode.textContent = "What I found from the DB";
+        let info = departmentNode.nextElementSibling;
+        info.textContent = "What I found from the DB";
+
+        
+
+
         function createFakeContacts() {
             console.log('generating fake contacts');
 

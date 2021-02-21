@@ -158,11 +158,7 @@ var databaseName = 'ContactsDB';
             document.getElementById("name1").innerHTML = studName.value;
         };
 
-        document.getElementById('populateButton').onclick = function(e) {
-            e.preventDefault();
-
-            createFakeContacts();
-        };
+       
 
         contactsDB.readWrite([ contactsStoreName ], function(tx) {
             var contact = {
@@ -229,39 +225,39 @@ var databaseName = 'ContactsDB';
         
 
 
-        function createFakeContacts() {
-            console.log('generating fake contacts');
+        // function createFakeContacts() {
+        //     console.log('generating fake contacts');
 
-            contactsDB.readWrite([ contactsStoreName ], function(tx) {
-                for (var i = 0, n = 10; i < n; i++) {
-                    var name = Faker.Name.firstName();
-                    var email = name.toLowerCase() +
-                                Math.round(Math.random() * 1000) +
-                                '@example.' +
-                                Faker.Helpers.randomize(definitions.domain_suffix());
+        //     contactsDB.readWrite([ contactsStoreName ], function(tx) {
+        //         for (var i = 0, n = 10; i < n; i++) {
+        //             var name = Faker.Name.firstName();
+        //             var email = name.toLowerCase() +
+        //                         Math.round(Math.random() * 1000) +
+        //                         '@example.' +
+        //                         Faker.Helpers.randomize(definitions.domain_suffix());
 
-                    var contact = {
-                        name: name,
-                        email: email,
-                        desc:desc
-                    };
+        //             var contact = {
+        //                 name: name,
+        //                 email: email,
+        //                 desc:desc
+        //             };
 
-                    tx.objectStore(contactsStoreName).put(contact);
+        //             tx.objectStore(contactsStoreName).put(contact);
 
-                    addContactToTable(contact);
-                }
-            }, function() {
-                console.log('done generating fake contacts');
-            });
+        //             addContactToTable(contact);
+        //         }
+        //     }, function() {
+        //         console.log('done generating fake contacts');
+        //     });
+        // }
+
+        // document.getElementById('deleteButton').onclick = function(e) {
+        //     e.preventDefault();
+
+        //     console.log('deleting');
+
+        //     DB.deleteDatabase(databaseName, function() {
+        //         console.log('deleted');
+        //     });
+        // };
         }
-
-        document.getElementById('deleteButton').onclick = function(e) {
-            e.preventDefault();
-
-            console.log('deleting');
-
-            DB.deleteDatabase(databaseName, function() {
-                console.log('deleted');
-            });
-        };
-

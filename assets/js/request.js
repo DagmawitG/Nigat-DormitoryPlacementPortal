@@ -30,7 +30,7 @@ let idbSupported = false
             console.log(e.target)
             // 이벤트 등록
             displayData();
-            // document.querySelector("#addButton").addEventListener("click", addPerson, false);
+            document.querySelector("#addButton").addEventListener("click", addPerson, false);
         }
         openRequest.onerror = function (e) {
             console.log("Error");
@@ -38,45 +38,45 @@ let idbSupported = false
         }
     }
 
-    // function addPerson(e) {
-    //     var name = document.querySelector("#studName").value;
-    //     var id = document.querySelector("#studID").value;
-    //     var desc = document.querySelector("#studDesc").value;
-    //     // var year = document.querySelector("#studYear").value;
-    //     // var dep = document.querySelector("#studDep").value;
-    //     // var dno = '';
-    //     // var camp = '';
-    //     console.log("About to add " + name + "/" + id);
+    function addPerson(e) {
+        var name = document.querySelector("#studName").value;
+        var id = document.querySelector("#studID").value;
+        var desc = document.querySelector("#studDesc").value;
+        // var year = document.querySelector("#studYear").value;
+        // var dep = document.querySelector("#studDep").value;
+        // var dno = '';
+        // var camp = '';
+        console.log("About to add " + name + "/" + id);
 
-    //     //people 테이블에 데이터 add 선언..
-    //     var transaction = db.transaction(["firstOS"], "readwrite");
-    //     var store = transaction.objectStore("firstOS");
+        //people 테이블에 데이터 add 선언..
+        var transaction = db.transaction(["firstOS"], "readwrite");
+        var store = transaction.objectStore("firstOS");
 
-    //     //Define a person
-    //     var person = {
-    //         name: name,
-    //         id: id,
-    //         desc: desc,
-    //         // year: year,
-    //         // dep: dep,
-    //         // dno: dno,
-    //         // camp: camp,
-    //         created: new Date()
-    //     }
+        //Define a person
+        var person = {
+            name: name,
+            id: id,
+            desc: desc,
+            // year: year,
+            // dep: dep,
+            // dno: dno,
+            // camp: camp,
+            created: new Date()
+        }
 
-    //     //Perform the add
-    //     // (data, key)a
-    //     var request = store.add(person);
+        //Perform the add
+        // (data, key)a
+        var request = store.add(person);
 
-    //     request.onerror = function (e) {
-    //         console.warn("Error", e.target.error.name);
-    //         //some type of error handler
-    //     }
+        request.onerror = function (e) {
+            console.warn("Error", e.target.error.name);
+            //some type of error handler
+        }
 
-    //     request.onsuccess = function (e) {
-    //         console.log("Woot! Did it");
-    //     }
-    // }
+        request.onsuccess = function (e) {
+            console.log("Woot! Did it");
+        }
+    }
 
     function displayData() {
         var transaction = db.transaction(['firstOS'], "readonly");

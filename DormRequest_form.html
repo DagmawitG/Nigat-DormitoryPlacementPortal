@@ -48,40 +48,40 @@
     <div class="main">
         <form>
             <div >
-                <h2 id="name">Name</h2>
-                <input class="fullname" type="text" name="full name" placeholder="Full Name">
+                <h2 class="name">Name</h2>
+                <input class="fullname" id="studName" type="text" name="full name" placeholder="Full Name">
                 
 
             </div>
-            <h2 id="name">ID Number</h2>
-            <input class="id" type="text" name="id" placeholder="ID Number">
-            <h2 id="name">Gender</h2>
+            <h2 class="name">ID Number</h2>
+            <input class="id" id="studID" type="text" name="id" placeholder="ID Number">
+            <h2 class="name">Gender</h2>
             
             <label class="radio">
-               <input class = "radio-one"type="radio"  name="">
+               <input class = "radio-one" type="radio"  name="">
                <span class="checkmark"></span>
                Male
             </label>
             <label class="radio">
-                <input class = "radio-two"type="radio"  name="">
+                <input class = "radio-two" type="radio"  name="">
                 <span class="checkmark"></span>
                 Female
              </label>
 
             
-            <h2 id="name">Email</h2>
+            <h2 class="name">Email</h2>
             <input class="email" type="email" name="email" placeholder="Email">
-            <h2 id="name">Phone</h2>
+            <h2 class="name">Phone</h2>
             <input type="text" class="code" name="areaCode" placeholder="Area Code" value="+251">
 
             <input type="text" class="number" name="phone" placeholder="Phone Number">
-            <h2 id="name">Address</h2>
+            <h2 class="name">Address</h2>
             <input type="text" class="address" placeholder="State">
             <input type="text" class="address" placeholder="City"><br>
             <input type="text" class="address" placeholder="Sub-city">
             <input type="text" class="address" placeholder="Woreda">
             
-            <h2 id="name">Institution </h2>
+            <h2 class="name">Institution </h2>
             <select class="option" name="institution">
                 <option disabled="disabled" selected="selected">Choose Option </option>
                 <option>
@@ -95,8 +95,8 @@
                 </option>
               
             </select>
-            <h2 id="name">Department/Year </h2>
-            <select class="options" name="institution">
+            <h2 class="name">Department/Year </h2>
+            <select class="options" name="institution" id="studDep">
                 <option disabled="disabled" selected="selected">Choose Option </option>
                 <option>
                    Software
@@ -112,7 +112,7 @@
                 </option>
               
             </select>
-            <select class="options" name="institution">
+            <select class="options" name="institution" id="studYear">
                 <option disabled="disabled" selected="selected">Year </option>
                 <option>
                    1
@@ -131,11 +131,11 @@
                 </option>
               
             </select>
-            <h2 id="name">Description</h2>
-            <textarea class="description" name="description" rows="6" cols="50" placeholder="Why Do You Need Dorm?"></textarea>
+            <h2 class="name">Description</h2>
+            <textarea class="description" id="studDesc" name="description" rows="6" cols="50" placeholder="Why Do You Need Dorm?"></textarea>
 
             
-          <button type="submit">Submit</button>  
+            <button type="submit" id="addButton">Submit</button>   
 
             
 
@@ -144,7 +144,7 @@
     </div>
 </div>
 
-
+<script src="assets/js/request.js"></script>
 
 </body>
 </html>

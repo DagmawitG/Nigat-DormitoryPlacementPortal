@@ -15,12 +15,14 @@ var indexedDB = window.indexedDB ||
                         setVerReq.onsuccess = function(e) {
                             console.log('upgrading');
                             upgrade(e.target.result.db);
+                            
                             done();
 
                         };
                     } else {
                         done();
                     }
+                    
                 };
                 openReq.onupgradeneeded = function(e) {
                     // Never gets raised before Chrome 23.
@@ -86,7 +88,7 @@ var databaseName = 'ContactsDB';
 
         var contactsDB = new DB(databaseName);
 
-        var contacts = document.getElementById('contacts');
+        // var contacts = document.getElementById('contacts');
 
         contactsDB.init(1, function(db) {
             db.createObjectStore(contactsStoreName, {
@@ -103,7 +105,7 @@ var databaseName = 'ContactsDB';
                 var cursor = tx.objectStore(contactsStoreName).openCursor();
                 cursor.onsuccess = function(e) {
                     if (e.target.result) {
-                        addContactToTable(e.target.result.value);
+                        // addContactToTable(e.target.result.value);
                         e.target.result.continue();
                     }
                 };
@@ -113,41 +115,67 @@ var databaseName = 'ContactsDB';
             });
         }
 
-        function addContactToTable(contact) {
-            var newRow = contacts.insertRow(-1);
-            var nameCell = newRow.insertCell(-1);
-            nameCell.textContent = contact.name;
-            var emailCell = newRow.insertCell(-1);
-            emailCell.textContent = contact.email;
-            var descCell = newRow.insertCell(-1);
-            descCell.textContent = contact.desc;
-        }
+        // function addContactToTable(contact) {
+
+        //     var newRow = contacts.insertRow(-1);
+        //     var nameCell = newRow.insertCell(-1);
+        //     nameCell.textContent = contact.name;
+        //     var idCell = newRow.insertCell(-1);
+        //     idCell.textContent = contact.id;
+        //     var descCell = newRow.insertCell(-1);
+        //     descCell.textContent = contact.desc;
+        // }
 
         var studName = document.getElementById('studName');
+        var studDep = document.getElementById('studDep');
+        var studYear = document.getElementById('studYear');
         var studID = document.getElementById('studID');
         var studDesc = document.getElementById('studDesc');
+        
 
         document.getElementById('addButton').onclick = function(e) {
             e.preventDefault();
 
             var name = studName.value;
-            var email = studID.value;
+            var id = studID.value;
             var desc = studDesc.value;
+            var year = studYear.value;
+            var dep = studDep.value;
+            var dno = '';
+            var camp = '';
 
             console.log('adding');
 
             contactsDB.readWrite([ contactsStoreName ], function(tx) {
                 var contact = {
                     name: name,
-                    email: email,
-                    desc: desc
+                    id: id,
+                    desc: desc,
+                    year: year,
+                    dep: dep,
+                    dno: dno,
+                    camp: camp
                 };
 
                 tx.objectStore(contactsStoreName).put(contact);
 
-                addContactToTable(contact);
+                // addContactToTable(contact);
             }, function() {
                 console.log('added');
+                let index = objectStore.index("date");
+                
+                index.openCursor(contactsDB, contactsStoreName).onsuccess = function (e) {
+                    // assign the current cursor
+                    let cursor = e.target.result;
+                    while(cursor){
+                        console.log(cursor.value)
+                        let cardContent = document.querySelector('#name1');
+                        cardContent.innerHTML = (cursor.value.name);
+                        cursor.continue()
+                    }
+                    
+                };
+           
 
                 studName.value = '';
                 studID.value = '';
@@ -155,25 +183,28 @@ var databaseName = 'ContactsDB';
 
                 studName.focus();
             });
-            document.getElementById("name1").innerHTML = studName.value;
+           
+            
         };
+        // document.getElementById("name1").innerHTML = studName.value;
+        // document.getElementById('populateButton').onclick = function(e) {
+        //     e.preventDefault();
 
-        document.getElementById('populateButton').onclick = function(e) {
-            e.preventDefault();
-
-            createFakeContacts();
-        };
+        //     // createFakeContacts();
+        // };
 
         contactsDB.readWrite([ contactsStoreName ], function(tx) {
             var contact = {
                 name: name,
-                email: email,
+                id: id,
                 desc: desc
             };
 
             tx.objectStore(contactsStoreName).put(contact);
 
-            addContactToTable(contact);    
+            // addContactToTable(contact);    
+
+        });
         
             /* function displayTaskList() {
                 // clear the previous task list
@@ -184,13 +215,7 @@ var databaseName = 'ContactsDB';
         
         
          */
-                let index = objectStore.index("date");
-                index.openCursor(contactsDB, contactsStoreName).onsuccess = function (e) {
-                    // assign the current cursor
-                    let cursor = e.target.result;
-                    let cardContent = document.getElementById('name1');
-                    cardContent.innerHTML = (contact,1);
-                   
+               
                 /*     if (cursor) {
                         
                         // Create an li element when the user adds a task 
@@ -219,49 +244,49 @@ var databaseName = 'ContactsDB';
                     }
                 }
             } */
-        let cardContent = document.getElementById('name1');
-        cardContent.innerHTML =  contactss;
-        let departmentNode = cardContent.nextElementSibling;
-        departmentNode.textContent = "What I found from the DB";
-        let info = departmentNode.nextElementSibling;
-        info.textContent = "What I found from the DB";
+        // let cardContent = document.getElementById('name1');
+        // cardContent.innerHTML =  contactss;
+        // let departmentNode = cardContent.nextElementSibling;
+        // departmentNode.textContent = "What I found from the DB";
+        // let info = departmentNode.nextElementSibling;
+        // info.textContent = "What I found from the DB";
 
         
 
 
-        function createFakeContacts() {
-            console.log('generating fake contacts');
+        // function createFakeContacts() {
+        //     console.log('generating fake contacts');
 
-            contactsDB.readWrite([ contactsStoreName ], function(tx) {
-                for (var i = 0, n = 10; i < n; i++) {
-                    var name = Faker.Name.firstName();
-                    var email = name.toLowerCase() +
-                                Math.round(Math.random() * 1000) +
-                                '@example.' +
-                                Faker.Helpers.randomize(definitions.domain_suffix());
+        //     contactsDB.readWrite([ contactsStoreName ], function(tx) {
+        //         for (var i = 0, n = 10; i < n; i++) {
+        //             var name = Faker.Name.firstName();
+        //             var id = name.toLowerCase() +
+        //                         Math.round(Math.random() * 1000) +
+        //                         '@example.' +
+        //                         Faker.Helpers.randomize(definitions.domain_suffix());
 
-                    var contact = {
-                        name: name,
-                        email: email,
-                        desc:desc
-                    };
+        //             var contact = {
+        //                 name: name,
+        //                 id: id,
+        //                 desc:desc
+        //             };
 
-                    tx.objectStore(contactsStoreName).put(contact);
+        //             tx.objectStore(contactsStoreName).put(contact);
 
-                    addContactToTable(contact);
-                }
-            }, function() {
-                console.log('done generating fake contacts');
-            });
-        }
+        //             addContactToTable(contact);
+        //         }
+        //     }, function() {
+        //         console.log('done generating fake contacts');
+        //     });
+        // }
 
-        document.getElementById('deleteButton').onclick = function(e) {
-            e.preventDefault();
+        // document.getElementById('deleteButton').onclick = function(e) {
+        //     e.preventDefault();
 
-            console.log('deleting');
+        //     console.log('deleting');
 
-            DB.deleteDatabase(databaseName, function() {
-                console.log('deleted');
-            });
-        };
-
+        //     DB.deleteDatabase(databaseName, function() {
+        //         console.log('deleted');
+        //     });
+        // };
+        

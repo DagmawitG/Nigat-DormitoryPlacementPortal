@@ -72,7 +72,7 @@ let students = [
   ];
 
 let fkilo = 4; //Number of available dorm spaces in 5-kilo
-let skilo = 30; // Number of available dorm spaces in 6-kilo
+let skilo = 20; // Number of available dorm spaces in 6-kilo
 let fbe = 10; //Number of available dorm spaces in fbe
 let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
 let skilopd = 2; //Number of students assigned per dorm at 6-kilo
@@ -181,4 +181,28 @@ function assign(list, pd) {
     while (list.length) newArray.push(list.splice(0, pd));
     return newArray;
   }
+
+  console.log(students);
+
+  //function to display assigned rooms for each student
+function display(array, campusName) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < array[i].length; j++) {
+        console.log(
+          array[i][j].name +
+            " has been assigned to dorm number " +
+            (parseInt(i) + 1) +
+            " at " +
+            campusName
+        );
+      }
+    }
+  }
   
+  display(fiveKiloStudents, "5-kilo campus");
+  display(fbeStudents, "FBE campus");
+  display(sixKiloStudents, "6-kilo campus");
+
+  // const accept_btn=document.querySelector('#accept');
+  
+  // accept_btn.addEventListener('click', assign)

@@ -66,51 +66,44 @@ var indexedDB = window.indexedDB ||
             };
         }
 
-        DB.deleteDatabase = function(name, done) {
-            var delReq = indexedDB.deleteDatabase(name);
-            delReq.onsuccess = function(e) {
-                // Not triggered before Chrome 23.
-                done();
-            };
-            delReq.onerror = function(e) {
-                console.log('delete error');
-            };
-            delReq.onblocked = function(e) {
-                console.log('delete blocked');
-            };
-        };
-
-var databaseName = 'ContactsDB';
-        var contactsStoreName = 'contacts';
-
-        var contactsDB = new DB(databaseName);
-
-        var contacts = document.getElementById('contacts');
-
-        contactsDB.init(1, function(db) {
-            db.createObjectStore(contactsStoreName, {
-                autoIncrement: true
-            });
-        }, function() {
-            console.log('ready');
-
-            loadContactsTable();
-        });
-
-        function loadContactsTable() {
-            contactsDB.read([ contactsStoreName ], function(tx) {
-                var cursor = tx.objectStore(contactsStoreName).openCursor();
-                cursor.onsuccess = function(e) {
-                    if (e.target.result) {
-                        addContactToTable(e.target.result.value);
-                        e.target.result.continue();
-                    }
-                };
-                cursor.onerror = function(e) {
-                    console.log('cursor error');
-                };
-            });
+       
+        function addContactToTable(contact) {
+            var newRow = contacts.insertRow(-1);
+            var nameCell = newRow.insertCell(-1);
+            nameCell.textContent = contact.name;
+            var emailCell = newRow.insertCell(-1);
+            emailCell.textContent = contact.email;
         }
+
+        var nameInput = document.getElementById('nameInput');
+        var emailInput = document.getElementById('emailInput');
+
+        document.getElementById('addButton').onclick = function(e) {
+            e.preventDefault();
+
+            var name = nameInput.value;
+            var email = emailInput.value;
+
+            console.log('adding');
+
+            contactsDB.readWrite([ contactsStoreName ], function(tx) {
+                var contact = {
+                    name: name,
+                    email: email
+                };
+
+                tx.objectStore(contactsStoreName).put(contact);
+
+                addContactToTable(contact);
+            }, function() {
+                console.log('added');
+
+                nameInput.value = '';
+                emailInput.value = '';
+
+                nameInput.focus();
+            });
+        };
 
         function addContactToTable(contact) {
             var newRow = contacts.insertRow(-1);

@@ -29,7 +29,7 @@ let idbSupported = false
             db = e.target.result;
             console.log(e.target)
             // 이벤트 등록
-            displayData();
+            // displayData();
             document.querySelector("#addButton").addEventListener("click", addPerson, false);
         }
         openRequest.onerror = function (e) {
@@ -42,10 +42,11 @@ let idbSupported = false
         var name = document.querySelector("#studName").value;
         var id = document.querySelector("#studID").value;
         var desc = document.querySelector("#studDesc").value;
-        // var year = document.querySelector("#studYear").value;
-        // var dep = document.querySelector("#studDep").value;
-        // var dno = '';
-        // var camp = '';
+        var year = document.querySelector("#studYear").value;
+        var dep = document.querySelector("#studDep").value;
+        var gen = document.querySelector("#studGen").value;
+        var dno = '';
+        var camp = '';
         console.log("About to add " + name + "/" + id);
 
         //people 테이블에 데이터 add 선언..
@@ -57,10 +58,11 @@ let idbSupported = false
             name: name,
             id: id,
             desc: desc,
-            // year: year,
-            // dep: dep,
-            // dno: dno,
-            // camp: camp,
+            year: year,
+            gen: gen,
+            dep: dep,
+            dno: dno,
+            camp: camp,
             created: new Date()
         }
 
@@ -78,28 +80,28 @@ let idbSupported = false
         }
     }
 
-    function displayData() {
-        var transaction = db.transaction(['firstOS'], "readonly");
-        var objectStore = transaction.objectStore('firstOS');
+    // function displayData() {
+    //     var transaction = db.transaction(['firstOS'], "readonly");
+    //     var objectStore = transaction.objectStore('firstOS');
         
-        objectStore.openCursor().onsuccess = function(event) {
-            var cursor = event.target.result;
-          if(cursor) {
+    //     objectStore.openCursor().onsuccess = function(event) {
+    //         var cursor = event.target.result;
+    //       if(cursor) {
               
-            // var listItem = document.createElement('li');
-            // listItem.innerHTML = cursor.value.name + ', ' + cursor.value.email;
-            // list.appendChild(listItem);
-            document.getElementById("cont").innerHTML+=`
-            <div alt="" class="" ></div><h3 id="name1" class="u-custom-font u-font-oswald ">${cursor.value.name}</h3>
-              <p class="u-text u-text-palette-2-base u-texts" id="id1">${cursor.value.id}</p>
-              <p class="" id="desc1">${cursor.value.desc}</p>`;
-            // document.getElementById("name1").innerHTML=cursor.value.name;
-            // document.getElementById("id1").innerHTML=cursor.value.id;
-            // document.getElementById("desc1").innerHTML=cursor.value.desc;
+    //         // var listItem = document.createElement('li');
+    //         // listItem.innerHTML = cursor.value.name + ', ' + cursor.value.email;
+    //         // list.appendChild(listItem);
+    //         document.getElementById("cont").innerHTML+=`
+    //         <div alt="" class="" ></div><h3 id="name1" class="u-custom-font u-font-oswald ">${cursor.value.name}</h3>
+    //           <p class="u-text u-text-palette-2-base u-texts" id="id1">${cursor.value.id}</p>
+    //           <p class="" id="desc1">${cursor.value.desc}</p>`;
+    //         // document.getElementById("name1").innerHTML=cursor.value.name;
+    //         // document.getElementById("id1").innerHTML=cursor.value.id;
+    //         // document.getElementById("desc1").innerHTML=cursor.value.desc;
       
-            cursor.continue();
-          } else {
-            console.log('Entries all displayed.');
-          }
-        };
-      }
+    //         cursor.continue();
+    //       } else {
+    //         console.log('Entries all displayed.');
+    //       }
+    //     };
+    //   }

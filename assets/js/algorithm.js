@@ -1,75 +1,59 @@
 let students = [
-    {
-      name: "Nardos",
-      id: 3456,
-      sex: "F",
-      Year: 3,
-      department: "mechanical",
-    },
-    {
-      name: "Yonathan",
-      id: 3686,
-      sex: "M",
-      Year: 2,
-      department: "biomedical",
-    },
-    {
-      name: "Saron",
-      id: 1016,
-      sex: "F",
-      Year: 2,
-      department: "chemical",
-    },
-    {
-      name: "Abebe",
-      id: 4556,
-      sex: "M",
-      Year: 1,
-      department: "civil",
-    },
-    {
-      name: "Lili",
-      id: 3009,
-      sex: "F",
-      Year: 5,
-      department: "software",
-    },
-    {
-      name: "Chala",
-      id: 1056,
-      sex: "M",
-      Year: 4,
-      department: "electrical",
-    },
-    {
-      name: "Liya",
-      id: 8976,
-      sex: "F",
-      Year: 4,
-      department: "civil",
-    },
-    {
-      name: "Kebede",
-      id: 4545,
-      sex: "M",
-      Year: 5,
-      department: "software",
-    },
-    {
-      name: "Ethiopia",
-      id: 7878,
-      sex: "M",
-      Year: 4,
-      department: "software",
-    },
-    {
-      name: "Zara",
-      id: 1010,
-      sex: "F",
-      Year: 4,
-      department: "biomedical",
-    },
-  ];
+  
+]
+
+
+var openRequest = indexedDB.open("test", 3);
+
+openRequest.onupgradeneeded = function (e) {
+    console.log("running onupgradeneeded");
+    var thisDB = e.target.result;
+
+   
+    if (!thisDB.objectStoreNames.contains("secondOS")) {
+        thisDB.createObjectStore("firstOS", { autoIncrement:true });
+    }
+}
+
+
+openRequest.onsuccess = function (e) {
+    console.log("Success!");
+    
+    db = e.target.result;
+    console.log(e.target)
+    finalAssign();
+    
+    // document.querySelector("assignButton").addEventListener("click", finalAssign, false);
+    // document.addEventListener('DOMContentLoaded',finalAssign());
+    
+}
+openRequest.onerror = function (e) {
+    console.log("Error");
+    console.dir(e);
+}
+
+
+function finalAssign(e){
+  var transaction = db.transaction(["firstOS"], "readwrite");
+  var stud = transaction.objectStore("firstOS");
+  var request = stud.getAll();
+
+  request.onerror = function(event) {
+    // Handle errors!
+    console.log('error fetching data');
+  };
+  request.onsuccess = function(event) {
+    // Do something with the request.result!
+    // console.log(request.result)
+    students.push(request.result)
+    console.log(students)
+  };
+}
+
+
+
+
+
 
 let fkilo = 4; //Number of available dorm spaces in 5-kilo
 let skilo = 20; // Number of available dorm spaces in 6-kilo
@@ -202,6 +186,8 @@ function display(array, campusName) {
   display(fiveKiloStudents, "5-kilo campus");
   display(fbeStudents, "FBE campus");
   display(sixKiloStudents, "6-kilo campus");
+
+
 
   // const accept_btn=document.querySelector('#accept');
   

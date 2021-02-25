@@ -85,31 +85,66 @@ request.onupgradeneeded = function(event){
     
 };
 request.onsuccess = function(event){
-  var db = event.target.value;
-    var transaction = db.transaction(['Dorm_Data'])
-    var objectStore = transaction.objectStore("Dorm_Data");
-    objectStore.openCursor().onsuccess= (event) => {
-      var cursor = event.target.result;
-      console.log("hello");
-      if(cursor){
-        example.innerHTML += `
-          <div>
-        <table class= "table">
-        <tbody>
-        <tr>
-        <td>${cursor.value.name}</td>
-        <td>${cursor.value.id}</td>
-        <td>${cursor.value.gender}</td>
-        <td>${cursor.value.year}</td>
-        <td>${cursor.value.department}</td>
-        <td>${cursor.value.campus}</td>
-        <td>${cursor.value.room_number}</td>
-        </table>
-        </div>
-        `
-        cursor.continue;
-      }else{
-        console.log("Finished")
-      }
+  console.log("hello");
+  addToList()
+      
+  }
+// // this code will copy the values from the database onto a table
+function addToList(event){
+  var db = event.target.result;
+  var transaction = db.transaction(['Dorm_Data'])
+  var objectStore = transaction.objectStore("Dorm_Data");
+  objectStore.openCursor().onsuccess= (event) => {
+    var cursor = event.target.result;
+    console.log("hello");
+    if (cursor){
+      example.innerHTML += `
+      <table class= "table">
+      <tbody>
+      <tr>
+      <td>${cursor.value.name}</td>
+      <td>${cursor.value.id}</td>
+      <td>${cursor.value.gender}</td>
+      <td>${cursor.value.year}</td>
+      <td>${cursor.value.department}</td>
+      <td>${cursor.value.campus}</td>
+      <td>${cursor.value.room_number}</td>
+      </table>
+      `
+      cursor.continue;
+    }else{
+      console.log("Welcome");
+
     }
   }
+}
+window.addEventListener('load',function(){
+  // console.log(student_list);
+  let headers = ['Name' , 'ID' , 'Gender' ,'Year' , 'Department' , 'Campus' , 'Room Number']; 
+  let table = document.createElement('table');
+  let headerRow = document.createElement('tr');
+
+  headers.forEach(headerText => {
+    let header = document.createElement('th');
+    let textNode = document.createTextNode(headerText);
+    header.appendChild(textNode);
+    headerRow.appendChild(header);
+  });
+
+  table.appendChild(headerRow);
+  console.log(student_list);
+  student_list.forEach(student => {
+    let row = document.createElement('tr');
+
+    Object.values(student).forEach(text => {
+      let cell = document.createElement('td');
+      let textNode = document.createTextNode(text);
+      cell.appendChild(textNode);
+      row.appendChild(cell);
+    });
+      table.appendChild(row);
+  });
+  myTable.appendChild(table);
+  console.log("Operation successful");
+
+});

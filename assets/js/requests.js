@@ -7,18 +7,16 @@ let idbSupported = false
 
     if (idbSupported) {
         // indexedDB 열기
-        var openRequest = indexedDB.open("test", 3);
+        var openRequest = indexedDB.open("test");
 
         openRequest.onupgradeneeded = function (e) {
             console.log("running onupgradeneeded");
             var thisDB = e.target.result;
-            var thatDB = e.target.result;
 
-
-            if (!thisDB.objectStoreNames.contains("secondOS")) {
+            
                 thisDB.createObjectStore("firstOS", { autoIncrement:true });
-                thatDB.createObjectStore("accepted", {autoIncrement:true });
-            }
+                thisDB.createObjectStore("accepted", {autoIncrement:true });
+            
         }
 
 
@@ -46,22 +44,23 @@ let idbSupported = false
         // var myIndex = objectStore.index('id');
         objectStore.openCursor().onsuccess = function(event) {
             var cursor = event.target.result;
-            let n=0
+            
           if(cursor) {
               
             data= cursor.value.name
             document.getElementById("cont").innerHTML+=`
             <div class=" u-align-center-xs u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xl u-container-style u-list-item u-repeater-item">
       
-            <div class="card mb-4 u-container-layout u-similar-container u-container-layout-1" id="${n}">
+            <div class="card mb-4 u-container-layout u-similar-container u-container-layout-1" id="${cursor.key}">
               <div alt="" class="" ></div><h3 class="u-custom-font u-font-oswald ">${cursor.value.name}</h3>
               <p class="u-text u-text-palette-2-base u-texts">${cursor.value.id}</p>
               <p class="">${cursor.value.desc}</p>
-              <button class="u-btn          u-btn-5" id="acceptButton" onclick="addList(${cursor.value.id})">Accept</button>
-              <button class="u-btn          u-btn-6" id="declineButton">Decline</button>
+              <button class="u-btn          u-btn-5" id="acceptButton" onclick="addList(${cursor.key}, ${cursor.value.id})">Accept</button>
+              <button class="u-btn          u-btn-6" id="declineButton" onclick="decline(${cursor.key}, ${cursor.value.id})">Decline</button>
             </div>
           </div>`;
-            n=n+1
+            
+            // console.log(n);
             cursor.continue();
 
           } else {
@@ -74,10 +73,10 @@ let idbSupported = false
         
       }
 
-      function addList(data){
+      function addList(d, data){
 
         
-        var transaction = db.transaction(["firstOS"]);
+        var transaction = db.transaction(["firstOS"], "readwrite");
         var objectStore = transaction.objectStore("firstOS");
         var request = objectStore.get(data);
         request.onerror = function(event) {
@@ -88,13 +87,36 @@ let idbSupported = false
           
           console.log("Name for is " + request.result.name);
           students.push(request.result)
+          document.getElementById(d).innerHTML=`<h4 class="bg-warning">ID number - ${data} - has been Accepted</h4>`;
+          objectStore.delete(data)
         };
         console.log('add list initiated')
         
         // console.log(data)
         console.log(students)
+
+        // var transaction2 = db.transaction(["accepted"]);
+        // var acceptance = transaction2.objectStore("accepted");
+        // var init = acceptance.add(request.result);
+
+        // init.onerror=function(event){};
+        // init.onsuccess=function(event){
+        //   console.log("succesfully added");
+        // }
+
       }
 
-      function me(){
-        console.log('me-yaw')
+      function decline(d, data){
+        var transaction = db.transaction(["firstOS"], "readwrite");
+        var objectStore = transaction.objectStore("firstOS");
+        var request = objectStore.get(data);
+        request.onerror = function(event) {
+          // Handle errors!
+        };
+        request.onsuccess = function(event) {
+          // Do something with the request.result!
+        console.log(d)
+        document.getElementById(d).innerHTML=`<h4 class="bg-danger">ID number - ${data} - has been Declined</h4>`;
+        objectStore.delete(data)
+        }
       }

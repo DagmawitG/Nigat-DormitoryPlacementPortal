@@ -1,5 +1,5 @@
-const myTable = document.querySelector(".table");
-const example = document.getElementById("#test");
+// const myTable = document.querySelector(".table");
+// const example = document.getElementById("test");
 
 //created a dummy list to enter into indexedDB 
 var student_list = [] ;
@@ -84,3 +84,32 @@ request.onupgradeneeded = function(event){
   console.log("Upgrade Successful");
     
 };
+request.onsuccess = function(event){
+  var db = event.target.value;
+    var transaction = db.transaction(['Dorm_Data'])
+    var objectStore = transaction.objectStore("Dorm_Data");
+    objectStore.openCursor().onsuccess= (event) => {
+      var cursor = event.target.result;
+      console.log("hello");
+      if(cursor){
+        example.innerHTML += `
+          <div>
+        <table class= "table">
+        <tbody>
+        <tr>
+        <td>${cursor.value.name}</td>
+        <td>${cursor.value.id}</td>
+        <td>${cursor.value.gender}</td>
+        <td>${cursor.value.year}</td>
+        <td>${cursor.value.department}</td>
+        <td>${cursor.value.campus}</td>
+        <td>${cursor.value.room_number}</td>
+        </table>
+        </div>
+        `
+        cursor.continue;
+      }else{
+        console.log("Finished")
+      }
+    }
+  }

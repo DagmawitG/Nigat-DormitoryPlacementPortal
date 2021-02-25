@@ -118,33 +118,3 @@ function addToList(event){
     }
   }
 }
-window.addEventListener('load',function(){
-  // console.log(student_list);
-  let headers = ['Name' , 'ID' , 'Gender' ,'Year' , 'Department' , 'Campus' , 'Room Number']; 
-  let table = document.createElement('table');
-  let headerRow = document.createElement('tr');
-
-  headers.forEach(headerText => {
-    let header = document.createElement('th');
-    let textNode = document.createTextNode(headerText);
-    header.appendChild(textNode);
-    headerRow.appendChild(header);
-  });
-
-  table.appendChild(headerRow);
-  console.log(student_list);
-  student_list.forEach(student => {
-    let row = document.createElement('tr');
-
-    Object.values(student).forEach(text => {
-      let cell = document.createElement('td');
-      let textNode = document.createTextNode(text);
-      cell.appendChild(textNode);
-      row.appendChild(cell);
-    });
-      table.appendChild(row);
-  });
-  myTable.appendChild(table);
-  console.log("Operation successful");
-
-});

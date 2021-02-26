@@ -13,10 +13,10 @@ let idbSupported = false
             console.log("running onupgradeneeded");
             var thisDB = e.target.result;
 
-            
+            if (!thisDB.objectStoreNames.contains("firstOS"), !thisDB.objectStoreNamescontains("accepted")){
                 thisDB.createObjectStore("firstOS", { autoIncrement:true });
                 thisDB.createObjectStore("accepted", {autoIncrement:true });
-            
+            }
         }
 
 
@@ -47,7 +47,7 @@ let idbSupported = false
             
           if(cursor) {
               
-            data= cursor.value.name
+            // data= cursor.value.name
             document.getElementById("cont").innerHTML+=`
             <div class=" u-align-center-xs u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xl u-container-style u-list-item u-repeater-item">
       
@@ -79,17 +79,23 @@ let idbSupported = false
         var transaction = db.transaction(["firstOS"], "readwrite");
         var objectStore = transaction.objectStore("firstOS");
         var request = objectStore.get(data);
+
+        
+
         request.onerror = function(event) {
           // Handle errors!
         };
         request.onsuccess = function(event) {
           // Do something with the request.result!
           
-          console.log("Name for is " + request.result.name);
+          // console.log("Name for is " + request.result.id);
           students.push(request.result)
+          populate(request.result)
           document.getElementById(d).innerHTML=`<h4 class="bg-warning">ID number - ${data} - has been Accepted</h4>`;
           objectStore.delete(data)
         };
+
+       
         console.log('add list initiated')
         
         // console.log(data)
@@ -118,5 +124,18 @@ let idbSupported = false
         console.log(d)
         document.getElementById(d).innerHTML=`<h4 class="bg-danger">ID number - ${data} - has been Declined</h4>`;
         objectStore.delete(data)
+        }
+      }
+    
+      function populate(data){
+      var transation2 = db.transaction(["accepted"], "readwrite");
+        var accept = transation2.objectStore("accepted");
+        var request2 = accept.add(data);
+
+        request2.onerror = function(e){
+
+        }
+        request2.onsuccess = function(e){
+          console.log("added")
         }
       }

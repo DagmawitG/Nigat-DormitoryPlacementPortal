@@ -17,7 +17,7 @@ let idbSupported = false
             //     thisDB.createObjectStore("secondOS", { autoIncrement:true });
             // }
 
-            if (!thisDB.objectStoreNames.contains("secondOS")) {
+            if (!thisDB.objectStoreNames.contains("firstOS")) {
                 thisDB.createObjectStore("firstOS", { autoIncrement:true });
             }
         }

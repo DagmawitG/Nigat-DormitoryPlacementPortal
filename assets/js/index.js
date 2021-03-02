@@ -30,7 +30,8 @@ var openRequest = indexedDB.open("test");
             
                 thisDB.createObjectStore("firstOS", { autoIncrement:true });
                 thisDB.createObjectStore("accepted", {autoIncrement:true });
-            
+                
+
         }
 
 

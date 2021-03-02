@@ -1,129 +1,354 @@
 
 
-let idbSupported = false
-if ("indexedDB" in window) {
-    idbSupported = true;
+
+
+
+var openRequest = indexedDB.open("test", 3);
+
+openRequest.onupgradeneeded = function (e) {
+    console.log("running onupgradeneeded");
+    var thisDB = e.target.result;
+
+   
+    if (!thisDB.objectStoreNames.contains("accepted")) {
+        thisDB.createObjectStore("accepted", { autoIncrement:true });
+    }
+    // thisDB.createObjectStore("try", {autoIncrement: true});
 }
 
-if (idbSupported) {
-    // indexedDB 열기
-    var openRequest = indexedDB.open("test", 3);
 
-    openRequest.onupgradeneeded = function (e) {
-        console.log("running onupgradeneeded");
-        var thisDB = e.target.result;
-
-        // firstOS이라는 저장소가 없으면
-        // if (!thisDB.objectStoreNames.contains("firstOS")) {
-        //     // 저장소를 만들어줌
-        //     thisDB.createObjectStore("secondOS", { autoIncrement:true });
-        // }
-
-        if (!thisDB.objectStoreNames.contains("secondOS")) {
-            thisDB.createObjectStore("firstOS", { autoIncrement:true });
-        }
-    }
+openRequest.onsuccess = function (e) {
+    console.log("Success!");
+    
+    db = e.target.result;
+    console.log(e.target)
+    finalAssign();
 
 
-    openRequest.onsuccess = function (e) {
-        console.log("Success!");
-        // 나중에 데이터를 추가하는데 사용되는 db
-        db = e.target.result;
-        console.log(e.target)
-        // 이벤트 등록
-        displayData();
-        // document.querySelector("#addButton").addEventListener("click", addPerson, false);
-    }
-    openRequest.onerror = function (e) {
-        console.log("Error");
-        console.dir(e);
-    }
+    // let fkilo = 4; //Number of available dorm spaces in 5-kilo
+    // let skilo = 20; // Number of available dorm spaces in 6-kilo
+    // let fbe = 10; //Number of available dorm spaces in fbe
+    // let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
+    // let skilopd = 2; //Number of students assigned per dorm at 6-kilo
+    // let fbepd = 2; //Number of students assigned per dorm at fbe
+
+
+
+    // students.sort(compareNames); //sort the student list alphabetically
+
+    // // Filter out students who are 5th year to be assigned to 5-kilo
+    // var fkilo_students = [];
+    // var rStudents = []; //remaining students who haven't been assigned yet
+    // for (var i = 0; i < students.length; i++) {
+    //   if (students[i].Year == 5 && fkilo_students.length < fkilo) {
+    //     fkilo_students.push(students[i]);
+    //   } else {
+    //     rStudents.push(students[i]);
+    //   }
+    // }
+    
+    // students = cloneArray(rStudents, students);
+    // students.sort(compareNames);
+    // rStudents = []
+    
+    // // Check if there are spaces left in 5-kilo after 5th years have been assigned
+    // if (fkilo - fkilo_students.length > 0) {
+    //     let spacesLeft = fkilo - fkilo_students.length;
+    //     for (var i = 0; i < students.length; i++) {
+    //       if (spacesLeft > 0) {
+    //         if (students[i].Year == 4) {
+    //           fkilo_students.push(students[i]);
+    //           spacesLeft--;
+    //         } else {
+    //           rStudents.push(students[i]);
+    //         }
+    //       } else {
+    //         rStudents.push(students[i]);
+    //       }
+    //     }
+    //   }
+    
+    //   let mStudents = [];
+    // let fStudents = [];
+    // students = cloneArray(rStudents, students);
+    
+    // //list out female and male students who aren't assigned yet
+    // for (var i = 0; i < students.length; i++) {
+    //   if (students[i].sex == "M") {
+    //     mStudents.push(students[i]); //male students assigned to 6-kilo
+    //   } else {
+    //     fStudents.push(students[i]); //female students assigned to FBE
+    //   }
+    // }
+    
+    // mStudents.sort(compareNandD); // to be assigned at 6-kilo
+    // fStudents.sort(compareNandD); // to be assigned at fbe
+    // console.log(mStudents);
+    // console.log(fStudents);
+    // console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
+    
+    // //assign each students to dorms in 5-kilo
+    // fiveKiloStudents = assign(fkilo_students, fkilopd);
+    // fbeStudents = assign(fStudents, fbepd);
+    // sixKiloStudents = assign(mStudents, skilopd);
+    
+    // console.log(fiveKiloStudents);
+    // console.log(fbeStudents);
+    // console.log(sixKiloStudents);
+    
+    // console.log(students);
+    // display(fiveKiloStudents, "5-kilo campus");
+    // display(fbeStudents, "FBE campus");
+    // display(sixKiloStudents, "6-kilo campus");
+
+
+
+
+
+
+    // algorithm(students)
+    
+    // document.querySelector("assignButton").addEventListener("click", finalAssign, false);
+    // document.addEventListener('DOMContentLoaded',finalAssign());
+    
+}
+openRequest.onerror = function (e) {
+    console.log("Error");
+    console.dir(e);
 }
 
-// function addPerson(e) {
-//     var name = document.querySelector("#studName").value;
-//     var id = document.querySelector("#studID").value;
-//     var desc = document.querySelector("#studDesc").value;
-//     // var year = document.querySelector("#studYear").value;
-//     // var dep = document.querySelector("#studDep").value;
-//     // var dno = '';
-//     // var camp = '';
-//     console.log("About to add " + name + "/" + id);
 
-//     //people 테이블에 데이터 add 선언..
-//     var transaction = db.transaction(["firstOS"], "readwrite");
-//     var store = transaction.objectStore("firstOS");
+function finalAssign(e){
+  let st = [
+    {
+      name: "Nardos",
+      id: 3456,
+      sex: "F",
+      Year: 3,
+      department: "mechanical",
+    },
+    {
+      name: "Alemu",
+      id: 3686,
+      sex: "M",
+      Year: 2,
+      department: "biomedical",
+    },
+    {
+      name: "Saron",
+      id: 1016,
+      sex: "F",
+      Year: 2,
+      department: "chemical",
+    },
+    {
+      name: "Abebe",
+      id: 4556,
+      sex: "M",
+      Year: 1,
+      department: "civil",
+    },
+    {
+      name: "Lili",
+      id: 3009,
+      sex: "F",
+      Year: 5,
+      department: "software",
+    },
+    {
+      name: "Chala",
+      id: 1056,
+      sex: "M",
+      Year: 4,
+      department: "electrical",
+    },
+    {
+      name: "Liya",
+      id: 8976,
+      sex: "F",
+      Year: 4,
+      department: "civil",
+    },
+    {
+      name: "Kebede",
+      id: 4545,
+      sex: "M",
+      Year: 5,
+      department: "software",
+    },
+    {
+      name: "Ethiopia",
+      id: 7878,
+      sex: "M",
+      Year: 4,
+      department: "software",
+    },
+    {
+      name: "Zara",
+      id: 1010,
+      sex: "F",
+      Year: 4,
+      department: "biomedical",
+    },
+  ]
+  var transaction = db.transaction(["try"], "readwrite");
+  var stud = transaction.objectStore("try");
+  var request = st.forEach(element => {
+    stud.add(element)
+  });
 
-//     //Define a person
-//     var person = {
-//         name: name,
-//         id: id,
-//         desc: desc,
-//         // year: year,
-//         // dep: dep,
-//         // dno: dno,
-//         // camp: camp,
-//         created: new Date()
-//     }
-
-//     //Perform the add
-//     // (data, key)a
-//     var request = store.add(person);
-
-//     request.onerror = function (e) {
-//         console.warn("Error", e.target.error.name);
-//         //some type of error handler
-//     }
-
-//     request.onsuccess = function (e) {
-//         console.log("Woot! Did it");
-//     }
-// }
-
-function displayData() {
+  request.onerror = function(event) {
+    // Handle errors!
+    console.log('error fetching data');
+  };
+  request.onsuccess = function(event) {
+    // Do something with the request.result!
+    // console.log(request.result)
+    // students.push(request.result)
     
-    var transaction = db.transaction(['firstOS'], "readonly");
-    var objectStore = transaction.objectStore('firstOS');
-    
-    objectStore.openCursor().onsuccess = function(event) {
-        var cursor = event.target.result;
-      if(cursor) {
-          
-        // var listItem = document.createElement('li');
-        // listItem.innerHTML = cursor.value.name + ', ' + cursor.value.email;
-        // list.appendChild(listItem);
-        document.getElementById("cont").innerHTML+=`
-        <div class=" u-align-center-xs u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xl u-container-style u-list-item u-repeater-item">
-  
-        <div class="card mb-4 u-container-layout u-similar-container u-container-layout-1">
-          <div alt="" class="" ></div><h3 class="u-custom-font u-font-oswald ">${cursor.value.name}</h3>
-          <p class="u-text u-text-palette-2-base u-texts">${cursor.value.id}</p>
-          <p class="">${cursor.value.desc}</p>
-          <div id='v'></div>
-          <a href="#" class="u-btn          u-btn-5" id="acceptButton">Accept</a>
-          <a href="#" class="u-btn          u-btn-6" id="declineButton">Decline</a>
-        </div>
-      </div>`;
-        // document.getElementById("name1").innerHTML=cursor.value.name;
-        // document.getElementById("id1").innerHTML=cursor.value.id;
-        // document.getElementById("desc1").innerHTML=cursor.value.desc;
-        
-        // console.log(students)
-        cursor.continue();
-      } else {
-        console.log('Entries all displayed.');
-      }
-      
-      
-    };
-    let students = []
-    document.getElementById('acceptButton').addEventListener("click", addList(document.getElementById('v').value, students))
-    function addList(data, students){
-      console.log('add list initiated')
-      students.push(data)
-      console.log(students)
-    }
-  }
+    console.log(request.result)
+    // return students
+  };
+}
 
+
+
+
+
+// let fkilo = 4; //Number of available dorm spaces in 5-kilo
+// let skilo = 20; // Number of available dorm spaces in 6-kilo
+// let fbe = 10; //Number of available dorm spaces in fbe
+// let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
+// let skilopd = 2; //Number of students assigned per dorm at 6-kilo
+// let fbepd = 2; //Number of students assigned per dorm at fbe
+
+// function compareNandD(a, b) {
+//     if (a.Year === b.Year) {
+//       return b.department - a.department;
+//     }
+//     return a.Year > b.Year ? 1 : -1;
+//   }
+
+//   function compareNames(a, b) {
+//     if (a.name < b.name) {
+//       return -1;
+//     }
+//     if (a.name > b.name) {
+//       return 1;
+//     }
+//     return 0;
+//   }
   
+//   //function to sort students  based on their department
+//   function compareDepartment(a, b) {
+//     if (a.department < b.department) {
+//       return -1;
+//     }
+//     if (a.department > b.department) {
+//       return 1;
+//     }
+//     return 0;
+//   }
+
+//   //function to clone an Array
+// function cloneArray(oArray, cArray) {
+//     cArray = [];
+//     cArray = oArray.map((a) => Object.assign({}, a));
+//     return cArray;
+//   }
+
+// // students.sort(compareNames); //sort the student list alphabetically
+
+// // // Filter out students who are 5th year to be assigned to 5-kilo
+// // var fkilo_students = [];
+// // var rStudents = []; //remaining students who haven't been assigned yet
+// // for (var i = 0; i < students.length; i++) {
+// //   if (students[i].Year == 5 && fkilo_students.length < fkilo) {
+// //     fkilo_students.push(students[i]);
+// //   } else {
+// //     rStudents.push(students[i]);
+// //   }
+// // }
+
+// // students = cloneArray(rStudents, students);
+// // students.sort(compareNames);
+// // rStudents = []
+
+// // // Check if there are spaces left in 5-kilo after 5th years have been assigned
+// // if (fkilo - fkilo_students.length > 0) {
+// //     let spacesLeft = fkilo - fkilo_students.length;
+// //     for (var i = 0; i < students.length; i++) {
+// //       if (spacesLeft > 0) {
+// //         if (students[i].Year == 4) {
+// //           fkilo_students.push(students[i]);
+// //           spacesLeft--;
+// //         } else {
+// //           rStudents.push(students[i]);
+// //         }
+// //       } else {
+// //         rStudents.push(students[i]);
+// //       }
+// //     }
+// //   }
+
+// //   let mStudents = [];
+// // let fStudents = [];
+// // students = cloneArray(rStudents, students);
+
+// // //list out female and male students who aren't assigned yet
+// // for (var i = 0; i < students.length; i++) {
+// //   if (students[i].sex == "M") {
+// //     mStudents.push(students[i]); //male students assigned to 6-kilo
+// //   } else {
+// //     fStudents.push(students[i]); //female students assigned to FBE
+// //   }
+// // }
+
+// // mStudents.sort(compareNandD); // to be assigned at 6-kilo
+// // fStudents.sort(compareNandD); // to be assigned at fbe
+// // console.log(mStudents);
+// // console.log(fStudents);
+// // console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
+
+// // //assign each students to dorms in 5-kilo
+// // fiveKiloStudents = assign(fkilo_students, fkilopd);
+// // fbeStudents = assign(fStudents, fbepd);
+// // sixKiloStudents = assign(mStudents, skilopd);
+
+// // console.log(fiveKiloStudents);
+// // console.log(fbeStudents);
+// // console.log(sixKiloStudents);
+
+// //function to assign each student to their dorms
+// function assign(list, pd) {
+//     let newArray = [];
+//     while (list.length) newArray.push(list.splice(0, pd));
+//     return newArray;
+//   }
+
+//   // console.log(students);
+
+//   //function to display assigned rooms for each student
+// function display(array, campusName) {
+//     for (let i = 0; i < array.length; i++) {
+//       for (let j = 0; j < array[i].length; j++) {
+//         console.log(
+//           array[i][j].name +
+//             " has been assigned to dorm number " +
+//             (parseInt(i) + 1) +
+//             " at " +
+//             campusName
+//         );
+//       }
+//     }
+//   }
   
+//   // display(fiveKiloStudents, "5-kilo campus");
+//   // display(fbeStudents, "FBE campus");
+//   // display(sixKiloStudents, "6-kilo campus");
+
+
+
+//   // const accept_btn=document.querySelector('#accept');
+  
+//   // accept_btn.addEventListener('click', assign) 

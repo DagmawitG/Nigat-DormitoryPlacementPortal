@@ -1,7 +1,7 @@
-let students = [
-  
-]
 
+const assignButton = document.querySelector('#assignButton')
+
+let students = [];
 
 var openRequest = indexedDB.open("test", 3);
 
@@ -10,9 +10,10 @@ openRequest.onupgradeneeded = function (e) {
     var thisDB = e.target.result;
 
    
-    if (!thisDB.objectStoreNames.contains("secondOS")) {
-        thisDB.createObjectStore("firstOS", { autoIncrement:true });
+    if (!thisDB.objectStoreNames.contains("accepted")) {
+        thisDB.createObjectStore("accepted", { autoIncrement:true });
     }
+    // thisDB.createObjectStore("try", {autoIncrement: true});
 }
 
 
@@ -21,7 +22,105 @@ openRequest.onsuccess = function (e) {
     
     db = e.target.result;
     console.log(e.target)
-    finalAssign();
+    // console.log(finalAssign(students))
+
+    
+    
+     finalAssign()
+    
+    console.log(students)
+    
+  
+assignButton.addEventListener('click', Execute);
+  
+  
+    
+      
+    
+    
+    function Execute(){
+
+    let fkilo = 4; //Number of available dorm spaces in 5-kilo
+    let skilo = 20; // Number of available dorm spaces in 6-kilo
+    let fbe = 10; //Number of available dorm spaces in fbe
+    let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
+    let skilopd = 2; //Number of students assigned per dorm at 6-kilo
+    let fbepd = 2; //Number of students assigned per dorm at fbe
+
+
+
+    students.sort(compareNames); //sort the student list alphabetically
+
+    // Filter out students who are 5th year to be assigned to 5-kilo
+    var fkilo_students = [];
+    var rStudents = []; //remaining students who haven't been assigned yet
+    for (var i = 0; i < students.length; i++) {
+      if (students[i].Year == 5 && fkilo_students.length < fkilo) {
+        fkilo_students.push(students[i]);
+      } else {
+        rStudents.push(students[i]);
+      }
+    }
+    
+    students = cloneArray(rStudents, students);
+    students.sort(compareNames);
+    rStudents = []
+    
+    // Check if there are spaces left in 5-kilo after 5th years have been assigned
+    if (fkilo - fkilo_students.length > 0) {
+        let spacesLeft = fkilo - fkilo_students.length;
+        for (var i = 0; i < students.length; i++) {
+          if (spacesLeft > 0) {
+            if (students[i].Year == 4) {
+              fkilo_students.push(students[i]);
+              spacesLeft--;
+            } else {
+              rStudents.push(students[i]);
+            }
+          } else {
+            rStudents.push(students[i]);
+          }
+        }
+      }
+    
+      let mStudents = [];
+    let fStudents = [];
+    students = cloneArray(rStudents, students);
+    
+    //list out female and male students who aren't assigned yet
+    for (var i = 0; i < students.length; i++) {
+      if (students[i].sex == "M") {
+        mStudents.push(students[i]); //male students assigned to 6-kilo
+      } else {
+        fStudents.push(students[i]); //female students assigned to FBE
+      }
+    }
+    
+    mStudents.sort(compareNandD); // to be assigned at 6-kilo
+    fStudents.sort(compareNandD); // to be assigned at fbe
+    console.log(mStudents);
+    console.log(fStudents);
+    console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
+    
+    //assign each students to dorms in 5-kilo
+    fiveKiloStudents = assign(fkilo_students, fkilopd);
+    fbeStudents = assign(fStudents, fbepd);
+    sixKiloStudents = assign(mStudents, skilopd);
+    
+    console.log(fiveKiloStudents);
+    console.log(fbeStudents);
+    console.log(sixKiloStudents);
+    
+    console.log(students);
+    display(fiveKiloStudents, "5-kilo campus");
+    display(fbeStudents, "FBE campus");
+    display(sixKiloStudents, "6-kilo campus");
+
+  }
+
+
+
+    // algorithm(students)
     
     // document.querySelector("assignButton").addEventListener("click", finalAssign, false);
     // document.addEventListener('DOMContentLoaded',finalAssign());
@@ -34,9 +133,13 @@ openRequest.onerror = function (e) {
 
 
 function finalAssign(e){
-  var transaction = db.transaction(["firstOS"], "readwrite");
-  var stud = transaction.objectStore("firstOS");
+
+
+  
+  var transaction = db.transaction(["try"], "readwrite");
+  var stud = transaction.objectStore("try");
   var request = stud.getAll();
+  
 
   request.onerror = function(event) {
     // Handle errors!
@@ -45,22 +148,34 @@ function finalAssign(e){
   request.onsuccess = function(event) {
     // Do something with the request.result!
     // console.log(request.result)
-    students.push(request.result)
-    console.log(students)
-  };
+    
+
+     students=request.result
+ 
+
+    // console.log(typeof(request.result))
+    // students.push(request.result)
+    
+    // console.log(students)
+    // console.log(typeof(students))
+    // console.log(students)
+     
+   
+    }
+  
+  
 }
 
 
 
 
 
-
-let fkilo = 4; //Number of available dorm spaces in 5-kilo
-let skilo = 20; // Number of available dorm spaces in 6-kilo
-let fbe = 10; //Number of available dorm spaces in fbe
-let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
-let skilopd = 2; //Number of students assigned per dorm at 6-kilo
-let fbepd = 2; //Number of students assigned per dorm at fbe
+// let fkilo = 4; //Number of available dorm spaces in 5-kilo
+// let skilo = 20; // Number of available dorm spaces in 6-kilo
+// let fbe = 10; //Number of available dorm spaces in fbe
+// let fkilopd = 2; //Number of students assigned per dorm at 5-kilo
+// let skilopd = 2; //Number of students assigned per dorm at 6-kilo
+// let fbepd = 2; //Number of students assigned per dorm at fbe
 
 function compareNandD(a, b) {
     if (a.Year === b.Year) {
@@ -97,67 +212,67 @@ function cloneArray(oArray, cArray) {
     return cArray;
   }
 
-students.sort(compareNames); //sort the student list alphabetically
+// students.sort(compareNames); //sort the student list alphabetically
 
-// Filter out students who are 5th year to be assigned to 5-kilo
-var fkilo_students = [];
-var rStudents = []; //remaining students who haven't been assigned yet
-for (var i = 0; i < students.length; i++) {
-  if (students[i].Year == 5 && fkilo_students.length < fkilo) {
-    fkilo_students.push(students[i]);
-  } else {
-    rStudents.push(students[i]);
-  }
-}
+// // Filter out students who are 5th year to be assigned to 5-kilo
+// var fkilo_students = [];
+// var rStudents = []; //remaining students who haven't been assigned yet
+// for (var i = 0; i < students.length; i++) {
+//   if (students[i].Year == 5 && fkilo_students.length < fkilo) {
+//     fkilo_students.push(students[i]);
+//   } else {
+//     rStudents.push(students[i]);
+//   }
+// }
 
-students = cloneArray(rStudents, students);
-students.sort(compareNames);
-rStudents = []
+// students = cloneArray(rStudents, students);
+// students.sort(compareNames);
+// rStudents = []
 
-// Check if there are spaces left in 5-kilo after 5th years have been assigned
-if (fkilo - fkilo_students.length > 0) {
-    let spacesLeft = fkilo - fkilo_students.length;
-    for (var i = 0; i < students.length; i++) {
-      if (spacesLeft > 0) {
-        if (students[i].Year == 4) {
-          fkilo_students.push(students[i]);
-          spacesLeft--;
-        } else {
-          rStudents.push(students[i]);
-        }
-      } else {
-        rStudents.push(students[i]);
-      }
-    }
-  }
+// // Check if there are spaces left in 5-kilo after 5th years have been assigned
+// if (fkilo - fkilo_students.length > 0) {
+//     let spacesLeft = fkilo - fkilo_students.length;
+//     for (var i = 0; i < students.length; i++) {
+//       if (spacesLeft > 0) {
+//         if (students[i].Year == 4) {
+//           fkilo_students.push(students[i]);
+//           spacesLeft--;
+//         } else {
+//           rStudents.push(students[i]);
+//         }
+//       } else {
+//         rStudents.push(students[i]);
+//       }
+//     }
+//   }
 
-  let mStudents = [];
-let fStudents = [];
-students = cloneArray(rStudents, students);
+//   let mStudents = [];
+// let fStudents = [];
+// students = cloneArray(rStudents, students);
 
-//list out female and male students who aren't assigned yet
-for (var i = 0; i < students.length; i++) {
-  if (students[i].sex == "M") {
-    mStudents.push(students[i]); //male students assigned to 6-kilo
-  } else {
-    fStudents.push(students[i]); //female students assigned to FBE
-  }
-}
+// //list out female and male students who aren't assigned yet
+// for (var i = 0; i < students.length; i++) {
+//   if (students[i].sex == "M") {
+//     mStudents.push(students[i]); //male students assigned to 6-kilo
+//   } else {
+//     fStudents.push(students[i]); //female students assigned to FBE
+//   }
+// }
 
-mStudents.sort(compareNandD); // to be assigned at 6-kilo
-fStudents.sort(compareNandD); // to be assigned at fbe
-console.log(mStudents);
-console.log(fStudents);
-console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
+// mStudents.sort(compareNandD); // to be assigned at 6-kilo
+// fStudents.sort(compareNandD); // to be assigned at fbe
+// console.log(mStudents);
+// console.log(fStudents);
+// console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
 
-//assign each students to dorms in 5-kilo
-fiveKiloStudents = assign(fkilo_students, fkilopd);
-fbeStudents = assign(fStudents, fbepd);
-sixKiloStudents = assign(mStudents, skilopd);
+// //assign each students to dorms in 5-kilo
+// fiveKiloStudents = assign(fkilo_students, fkilopd);
+// fbeStudents = assign(fStudents, fbepd);
+// sixKiloStudents = assign(mStudents, skilopd);
 
-console.log(fiveKiloStudents);
-console.log(fbeStudents);
-console.log(sixKiloStudents);
+// console.log(fiveKiloStudents);
+// console.log(fbeStudents);
+// console.log(sixKiloStudents);
 
 //function to assign each student to their dorms
 function assign(list, pd) {
@@ -166,7 +281,7 @@ function assign(list, pd) {
     return newArray;
   }
 
-  console.log(students);
+  // console.log(students);
 
   //function to display assigned rooms for each student
 function display(array, campusName) {
@@ -183,12 +298,12 @@ function display(array, campusName) {
     }
   }
   
-  display(fiveKiloStudents, "5-kilo campus");
-  display(fbeStudents, "FBE campus");
-  display(sixKiloStudents, "6-kilo campus");
+  // display(fiveKiloStudents, "5-kilo campus");
+  // display(fbeStudents, "FBE campus");
+  // display(sixKiloStudents, "6-kilo campus");
 
 
 
   // const accept_btn=document.querySelector('#accept');
   
-  // accept_btn.addEventListener('click', assign)
+  // accept_btn.addEventListener('click', assign) 

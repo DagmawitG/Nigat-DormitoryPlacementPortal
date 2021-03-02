@@ -4,16 +4,16 @@ let idbSupported = false
     }
 
     if (idbSupported) {
-        // indexedDB 열기
+        
         var openRequest = indexedDB.open("test", 3);
 
         openRequest.onupgradeneeded = function (e) {
             console.log("running onupgradeneeded");
             var thisDB = e.target.result;
 
-            // firstOS이라는 저장소가 없으면
+           
             // if (!thisDB.objectStoreNames.contains("firstOS")) {
-            //     // 저장소를 만들어줌
+          
             //     thisDB.createObjectStore("secondOS", { autoIncrement:true });
             // }
 
@@ -25,10 +25,10 @@ let idbSupported = false
 
         openRequest.onsuccess = function (e) {
             console.log("Success!");
-            // 나중에 데이터를 추가하는데 사용되는 db
+           
             db = e.target.result;
             console.log(e.target)
-            // 이벤트 등록
+        
             // displayData();
             document.querySelector("#addButton").addEventListener("click", addPerson, false);
         }
@@ -49,7 +49,6 @@ let idbSupported = false
         var camp = '';
         console.log("About to add " + name + "/" + id);
 
-        //people 테이블에 데이터 add 선언..
         var transaction = db.transaction(["firstOS"], "readwrite");
         var store = transaction.objectStore("firstOS");
 

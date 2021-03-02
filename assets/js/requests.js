@@ -6,7 +6,7 @@ let idbSupported = false
     }
 
     if (idbSupported) {
-        // indexedDB 열기
+        
         var openRequest = indexedDB.open("test");
 
         openRequest.onupgradeneeded = function (e) {
@@ -22,7 +22,7 @@ let idbSupported = false
 
         openRequest.onsuccess = function (e) {
             console.log("Success!");
-            // 나중에 데이터를 추가하는데 사용되는 db
+            
             db = e.target.result;
             console.log(e.target)
             // 이벤트 등록

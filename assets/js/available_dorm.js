@@ -1,5 +1,3 @@
-// const myTable = document.querySelector(".table");
-// const container = document.querySelector("#container");
 const example = document.querySelector("#example");
 var student_list = [] ;
 // list of students
@@ -66,12 +64,9 @@ var db;
 var request = indexedDB.open("Dorm Placement" , 1);
 request.onerror = function(event){
     var db = event.target.result;
-    // db.onerror = function(event){
-    // console.error("Database error :" + event.target.errorCode);
 }
 
 request.onupgradeneeded = function(event){
-  // db = event.target.result;
   var db = event.target.result;
   var objectStore = db.createObjectStore("Dorm_Data" , {keyPath : "id"});
   objectStore.createIndex("firstName" , "firstName" , {unique : false});
@@ -96,34 +91,7 @@ request.onupgradeneeded = function(event){
 request.onsuccess = function(event){
     console.log("hello");
     addToList(event)
-    // var db = event.target.value;
-    // var transaction = db.transaction(['Dorm_Data'])
-    // var objectStore = transaction.objectStore("Dorm_Data");
-    // objectStore.openCursor().onsuccess= (event) => {
-    //   var cursor = event.target.result;
-    //   console.log("hello");
-    //   if (cursor){
-    //     example.innerHTML += `
-    //     <div>
-    //     <table class= "table">
-    //     <tbody>
-    //     <tr>
-    //     <td>${cursor.value.name}</td>
-    //     <td>${cursor.value.id}</td>
-    //     <td>${cursor.value.gender}</td>
-    //     <td>${cursor.value.year}</td>
-    //     <td>${cursor.value.department}</td>
-    //     <td>${cursor.value.campus}</td>
-    //     <td>${cursor.value.room_number}</td>
-    //     </table>
-    //     </div>
-    //     `
-    //     cursor.continue;
-    //   }else{
-    //     console.log("Welcome");
-    //   }
-    // }
-  // }
+
 }
    
 
@@ -132,19 +100,7 @@ function addToList(event){
   var db = event.target.result;
   var transaction = db.transaction(['Dorm_Data']);
   var objectStore = transaction.objectStore("Dorm_Data");
-  // var table = document.createElement('table');
-  // table.className = "";
-  // table.id  = "example";
-  // var tHead = document.createElement('thead');
-  // var tr = document.createElement('tr');
-  // header.forEach(value =>{
-  //   var td = document.createElement('td');
-  //   td.appendChild(document.createTextNode(`${value}`));
-  //   tr.appendChild(td);
-  // })
-  // tHead.appendChild(tr)
-  // table.appendChild(tHead)
-  // container.appendChild(table)
+  
   objectStore.openCursor().onsuccess= (event) => {
     var cursor = event.target.result;
     if (cursor){

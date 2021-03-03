@@ -361,3 +361,11 @@
 
   
 }
+
+.topbuttons{
+  background-color: rgb(185, 172, 230);
+  padding: 4px 10px;
+  margin-inline: 160px;
+  margin-top: 60px;
+
+}

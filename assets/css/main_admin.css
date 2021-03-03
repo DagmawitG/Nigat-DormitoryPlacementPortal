@@ -1,0 +1,41 @@
+
+.body{
+    margin: 0px 150px 150px;
+    margin-top: 40px;
+    background-color: white;
+}
+
+.jumbotron{
+    margin-top: 45px;
+    /* box-shadow : 5px 8px #7a7676; */
+    border-radius: 20px;
+    justify-content: center;
+}
+#profile{   
+    border-radius: 100%; 
+    border-style: hidden;    
+    width : 250px;    
+    height : 250px;    
+    margin : 10px 15px 0px 15px; 
+}
+.para{
+    text-align: center;
+    font-size: 15px;
+}
+.navbar {
+    margin-bottom: 20px;
+    
+  }
+  
+.nav-link {
+    color: white;
+    
+}
+
+nav ul li a:hover{
+    color: rgb(219, 228, 203);
+}
+
+ul{
+    list-style: none;
+}

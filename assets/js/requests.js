@@ -1,5 +1,7 @@
 // let students = []
 
+const refreshButton = document.querySelector('#refreshButton')
+
 let idbSupported = false
     if ("indexedDB" in window) {
         idbSupported = true;
@@ -28,6 +30,7 @@ let idbSupported = false
             // 이벤트 등록
             displayData();
             // document.querySelector("#addButton").addEventListener("click", addPerson, false);
+            refreshButton.addEventListener("click", reload)
         }
         openRequest.onerror = function (e) {
             console.log("Error");
@@ -35,7 +38,9 @@ let idbSupported = false
         }
     }
 
-
+function reload(){
+  location.reload();
+}
     function displayData() {
       
         var transaction = db.transaction(['firstOS'], "readonly");
@@ -139,3 +144,5 @@ let idbSupported = false
           console.log("added")
         }
       }
+
+      

@@ -1,6 +1,7 @@
 const lst = document.getElementById('lst')
 const assignButton = document.querySelector('#assignButton')
 
+
 let students = [];
 
 var openRequest = indexedDB.open("test", 3);
@@ -39,6 +40,7 @@ assignButton.addEventListener('click', Execute);
     
     
     function Execute(){
+      
 
     let fkilo = 4; //Number of available dorm spaces in 5-kilo
     let skilo = 20; // Number of available dorm spaces in 6-kilo
@@ -116,10 +118,11 @@ assignButton.addEventListener('click', Execute);
     display(fbeStudents, "FBE campus");
     display(sixKiloStudents, "6-kilo campus");
 
-    var fks = fiveKiloStudents;
-    var fbs = fbeStudents;
-    var sks = sixKiloStudents;
+    export let fiveKiloStudents 
 
+    
+      hide()
+      // dis()
 
   }
 
@@ -136,6 +139,39 @@ openRequest.onerror = function (e) {
     console.dir(e);
 }
 
+// function dis(){
+//   var j = 0;
+//     lst.innerHTML=`five Kilo Students<br>`
+//     console.log('here')
+//     for (let k = 1; k<=fks.length; k++){
+//         lst.innerHTML+=`Dorm No: ${k} <br>`
+//         for (let i =0; i < fks[j].length; i++){
+//             lst.innerHTML+=`${fks[j][i].name}<br>`
+//         }
+//         j++
+//     }
+    
+//     var j = 0;
+//     lst.innerHTML=`<br><br>FBE Students<br>`
+//     for (let k = 1; k<=fbs.length; k++){
+//         lst.innerHTML+=`Dorm No: ${k} <br>`
+//         for (let i =0; i < fbs[j].length; i++){
+//             lst.innerHTML+=`${fbs[j][i].name}<br>`
+//         }
+//         j++
+//     }
+    
+//     var j = 0;
+//     lst.innerHTML+=`<br><br>Six Kilo Students<br>`
+//     for (let k = 1; k<=sks.length; k++){
+//         lst.innerHTML+=`Dorm No: ${k} <br>`
+//         for (let i =0; i < sks[j].length; i++){
+//             lst.innerHTML+=`${sks[j][i].name}<br>`
+//             // sks[j][i].put
+//         }
+//         j++
+//     }
+// }
 
 function finalAssign(e){
 
@@ -316,6 +352,11 @@ function display(array, campusName) {
       }
     }
   }
+
+  function hide(){
+    assignButton.style.display = 'none';
+    refreshButton.style.display = 'none';
+}
   
   // display(fiveKiloStudents, "5-kilo campus");
   // display(fbeStudents, "FBE campus");

@@ -118,7 +118,7 @@ assignButton.addEventListener('click', Execute);
     display(fbeStudents, "FBE campus");
     display(sixKiloStudents, "6-kilo campus");
 
-    export let fiveKiloStudents 
+     
 
     
       hide()

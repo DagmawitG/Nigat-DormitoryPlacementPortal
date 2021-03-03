@@ -1,16 +1,11 @@
 
 /* BASIC */
 
-html {
-    background-color: #56baed;
+.fadeInDown {
+    background-image:url('../images/gradient.svg');
   }
   
   body {
-<<<<<<< HEAD
-=======
-    background-color: rgb(255, 255, 255);
-    /* background-image: linear-gradient(rgba(255,0,0,0), rgb(195, 199, 221)); */
->>>>>>> 606ed0f4fd02ca14ebf967c2e89975c061b2a41a
     font-family: "Poppins", sans-serif;
     height: 100vh;
   }
@@ -82,7 +77,22 @@ html {
     border-bottom: 2px solid #5fbae9;
   }
   
-  
+  button {
+    color: #5fbae9 !important;
+    text-transform: uppercase;
+    background: #ffffff;
+    padding:2px 20px 2px 20px;
+    border: 2px solid #5fbae9 !important;
+    border-radius: 30px;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+    }
+   button:hover {
+      color: #a3a3a3 !important;
+     
+      border-color: #a3a3a3 !important;
+      transition: all 0.3s ease 0s;
+      }
   
   /* FORM TYPOGRAPHY*/
   
@@ -120,7 +130,7 @@ html {
     transform: scale(0.95);
   }
   
-  input[type=text] {
+  input[type=text],input[type=password] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -265,4 +275,10 @@ html {
   #icon {
     width:60%;
   }
-  
+
+  #incorrect{
+    color: red;
+  }
+  #char{
+    color: red;
+  }

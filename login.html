@@ -23,12 +23,13 @@
         </div>
     
         <!-- Login Form -->
-        <form>
-            <input type="text" id="login" class="fadeIn second " name="login" placeholder="Username">
-            <input type="text" id="password" class="fadeIn third " name="login" placeholder="password">
+        <form id="reset">
+            <input type="text" id="login" class="fadeIn second " name="login" placeholder="Username" required>
+            <input type="password" id="password" class="fadeIn third " name="login" placeholder="password" required>
             <p id="char"></p>
             <p id="incorrect"></p>
-            <button   id="login_btn" value="Log In" >Login</button>
+            <input type="submit" value="Login" id="login_btn">
+            
           </form>
     
         <!-- Remind Passowrd -->
@@ -41,6 +42,6 @@
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./assets/js/login_admin.js"></script>
+    <script src="./assets/js/login.js"></script>
 </body>
 </html>

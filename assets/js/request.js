@@ -65,9 +65,11 @@ let idbSupported = false
             created: new Date()
         }
 
+
         //Perform the add
         // (data, key)a
         var request = store.add(person);
+        addToDatabase(person)
 
         request.onerror = function (e) {
             console.warn("Error", e.target.error.name);
@@ -78,6 +80,22 @@ let idbSupported = false
             console.log("Woot! Did it");
         }
     }
+
+    function addToDatabase(newCoin)
+{
+ let listofCoin;
+ if(localStorage.getItem('coins') == null)
+ {
+  listofCoin = [];
+ }
+ else
+ {
+  listofCoin = JSON.parse(localStorage.getItem('coins'));
+ }
+ listofCoin.push(newCoin);
+  localStorage.setItem('coins', JSON.stringify(listofCoin));
+ 
+}
 
     // function displayData() {
     //     var transaction = db.transaction(['firstOS'], "readonly");

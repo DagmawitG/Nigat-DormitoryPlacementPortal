@@ -1,4 +1,4 @@
-
+const lst = document.getElementById('lst')
 const assignButton = document.querySelector('#assignButton')
 
 let students = [];
@@ -26,7 +26,7 @@ openRequest.onsuccess = function (e) {
 
     
     
-     finalAssign()
+     students=loadfromDB()
     
     console.log(students)
     
@@ -89,7 +89,7 @@ assignButton.addEventListener('click', Execute);
     
     //list out female and male students who aren't assigned yet
     for (var i = 0; i < students.length; i++) {
-      if (students[i].sex == "M") {
+      if (students[i].gen == "M") {
         mStudents.push(students[i]); //male students assigned to 6-kilo
       } else {
         fStudents.push(students[i]); //female students assigned to FBE
@@ -98,9 +98,9 @@ assignButton.addEventListener('click', Execute);
     
     mStudents.sort(compareNandD); // to be assigned at 6-kilo
     fStudents.sort(compareNandD); // to be assigned at fbe
-    console.log(mStudents);
-    console.log(fStudents);
-    console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
+    // console.log(mStudents);
+    // console.log(fStudents);
+    // console.log(fkilo_students); // 5th year students assigned to 5-kilo dormitory
     
     //assign each students to dorms in 5-kilo
     fiveKiloStudents = assign(fkilo_students, fkilopd);
@@ -115,6 +115,11 @@ assignButton.addEventListener('click', Execute);
     display(fiveKiloStudents, "5-kilo campus");
     display(fbeStudents, "FBE campus");
     display(sixKiloStudents, "6-kilo campus");
+
+    var fks = fiveKiloStudents;
+    var fbs = fbeStudents;
+    var sks = sixKiloStudents;
+
 
   }
 
@@ -136,8 +141,8 @@ function finalAssign(e){
 
 
   
-  var transaction = db.transaction(["try"], "readwrite");
-  var stud = transaction.objectStore("try");
+  var transaction = db.transaction(["accepted"], "readwrite");
+  var stud = transaction.objectStore("accepted");
   var request = stud.getAll();
   
 
@@ -159,11 +164,25 @@ function finalAssign(e){
     // console.log(students)
     // console.log(typeof(students))
     // console.log(students)
-     
+     return students
    
     }
   
   
+}
+function loadfromDB()
+{
+  let listofTasks;
+  if(localStorage.getItem('coins') == null)
+  {
+      false
+  }
+  else
+  {
+      listofTasks = JSON.parse(localStorage.getItem('coins'));
+      return listofTasks; 
+  }
+ 
 }
 
 
@@ -179,7 +198,7 @@ function finalAssign(e){
 
 function compareNandD(a, b) {
     if (a.Year === b.Year) {
-      return b.department - a.department;
+      return b.dep - a.dep;
     }
     return a.Year > b.Year ? 1 : -1;
   }
@@ -196,10 +215,10 @@ function compareNandD(a, b) {
   
   //function to sort students  based on their department
   function compareDepartment(a, b) {
-    if (a.department < b.department) {
+    if (a.dep < b.dep) {
       return -1;
     }
-    if (a.department > b.department) {
+    if (a.dep > b.dep) {
       return 1;
     }
     return 0;
@@ -252,7 +271,7 @@ function cloneArray(oArray, cArray) {
 
 // //list out female and male students who aren't assigned yet
 // for (var i = 0; i < students.length; i++) {
-//   if (students[i].sex == "M") {
+//   if (students[i].gen == "M") {
 //     mStudents.push(students[i]); //male students assigned to 6-kilo
 //   } else {
 //     fStudents.push(students[i]); //female students assigned to FBE

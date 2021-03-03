@@ -1,4 +1,4 @@
-let students = []
+// let students = []
 
 let idbSupported = false
     if ("indexedDB" in window) {
@@ -89,7 +89,7 @@ let idbSupported = false
           // Do something with the request.result!
           
           // console.log("Name for is " + request.result.id);
-          students.push(request.result)
+          // students.push(request.result)
           populate(request.result)
           document.getElementById(d).innerHTML=`<h4 class="bg-warning">ID number - ${data} - has been Accepted</h4>`;
           objectStore.delete(data)
@@ -99,7 +99,7 @@ let idbSupported = false
         console.log('add list initiated')
         
         // console.log(data)
-        console.log(students)
+        // console.log(students)
 
         // var transaction2 = db.transaction(["accepted"]);
         // var acceptance = transaction2.objectStore("accepted");

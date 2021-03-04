@@ -61,7 +61,7 @@ function userValidation(e) {
                 
                     if (cursor.key.toUpperCase() == input_text.value.toUpperCase() && cursor.value.password == input_password.value) {
 
-                        location.href = 'news.html'
+                        location.href = '../news.html'
                         document.getElementById("reset").reset()
 
 
@@ -106,7 +106,7 @@ function adminValidation(e) {
         if (cursor) {
 
             if (cursor.key.toUpperCase() == input_text.value.toUpperCase() && cursor.value.password == input_password.value) {
-                location.href = 'index_admin.html'
+                location.href = '../index_admin.html'
                 document.getElementById("reset").reset()
 
 

@@ -50,16 +50,17 @@
     <div class="main">
         <form>
             <div >
-                <h2 class="name">Name</h2>
-                <input class="fullname" id="studName" type="text" name="full name" placeholder="Full Name">
-                
+                <h2 class="name">First Name</h2>
+                <input class="fullname" id="studName" type="text" name="full name" placeholder="First Name" required>
+                <h2 class="name">Last Name</h2>
+                <input class="fullname" id="lastName" type="text" name="full name" placeholder="Last Name">
 
             </div>
             <h2 class="name">ID Number</h2>
-            <input class="id" id="studID" type="text" name="id" placeholder="ID Number">
+            <input class="id" id="studID" type="text" name="id" placeholder="ID Number" required>
             <h2 class="name">Gender</h2>
             
-            <select class="option" name="gender" id="studGen">
+            <select class="option" name="gender" id="studGen" required>
                 <option disabled="disabled" selected="selected">Choose Option </option>
                 <option>
                     M
@@ -87,18 +88,18 @@
             <select class="option" name="institution">
                 <option disabled="disabled" selected="selected">Choose Option </option>
                 <option>
-                    4k
+                    4kilo
                 </option>
                 <option>
-                    5k
+                    5kilo
                 </option>
                 <option>
-                    6k
+                    6kilo
                 </option>
               
             </select>
             <h2 class="name">Department/Year </h2>
-            <select class="options" name="institution" id="studDep">
+            <select class="options" name="institution" id="studDep" required>
                 <option disabled="disabled" selected="selected">Choose Option </option>
                 <option>
                    Software
@@ -114,7 +115,7 @@
                 </option>
               
             </select>
-            <select class="options" name="institution" id="studYear">
+            <select class="options" name="institution" id="studYear" required>
                 <option disabled="disabled" selected="selected">Year </option>
                 <option>
                    1
@@ -134,7 +135,7 @@
               
             </select>
             <h2 class="name">Description</h2>
-            <textarea class="description" id="studDesc" name="description" rows="6" cols="50" placeholder="Why Do You Need Dorm?"></textarea>
+            <textarea class="description" id="studDesc" name="description" rows="6" cols="50" placeholder="Why Do You Need Dorm?" required></textarea>
 
             
             <button type="submit" id="addButton">Submit</button>   

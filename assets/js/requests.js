@@ -9,7 +9,7 @@ let idbSupported = false
 
     if (idbSupported) {
         
-        var openRequest = indexedDB.open("test");
+        var openRequest = indexedDB.open("test", 3);
 
         openRequest.onupgradeneeded = function (e) {
             console.log("running onupgradeneeded");
@@ -27,7 +27,7 @@ let idbSupported = false
             
             db = e.target.result;
             console.log(e.target)
-            // 이벤트 등록
+            
             displayData();
             // document.querySelector("#addButton").addEventListener("click", addPerson, false);
             refreshButton.addEventListener("click", reload)
@@ -96,8 +96,13 @@ function reload(){
           // console.log("Name for is " + request.result.id);
           // students.push(request.result)
           populate(request.result)
-          document.getElementById(d).innerHTML=`<h4 class="bg-warning">ID number - ${data} - has been Accepted</h4>`;
+        
+          addToDatabase(request.result)
+          
+          document.getElementById(d).innerHTML=`<h4 class="bg-warning">Number - ${data} - has been Accepted</h4>`;
+         
           objectStore.delete(data)
+          
         };
 
        
@@ -117,6 +122,23 @@ function reload(){
 
       }
 
+      function addToDatabase(newCoin)
+      {
+       let listofCoin;
+       if(localStorage.getItem('coins') == null)
+       {
+        listofCoin = [];
+       }
+       else
+       {
+        listofCoin = JSON.parse(localStorage.getItem('coins'));
+       }
+       listofCoin.push(newCoin);
+        localStorage.setItem('coins', JSON.stringify(listofCoin));
+       
+      }
+      
+
       function decline(d, data){
         var transaction = db.transaction(["firstOS"], "readwrite");
         var objectStore = transaction.objectStore("firstOS");
@@ -127,7 +149,7 @@ function reload(){
         request.onsuccess = function(event) {
           // Do something with the request.result!
         console.log(d)
-        document.getElementById(d).innerHTML=`<h4 class="bg-danger">ID number - ${data} - has been Declined</h4>`;
+        document.getElementById(d).innerHTML=`<h4 class="bg-danger">Number - ${data} - has been Declined</h4>`;
         objectStore.delete(data)
         }
       }

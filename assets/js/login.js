@@ -8,8 +8,8 @@ submit.addEventListener("click", userValidation)
 // submit.addEventListener("click", resetFun)
 const loginAdminData = [
     { username: "dagmawit", password: "123456789" },
-    { username: "luhana", password: "56341234" },
-    { username: "nahom", password: "34679999" }
+    // { username: "luhana", password: "56341234" },
+    // { username: "nahom", password: "34679999" }
 
 
 ];

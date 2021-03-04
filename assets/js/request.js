@@ -68,8 +68,12 @@ let idbSupported = false
 
         //Perform the add
         // (data, key)a
+        if (person.name=="" || person.id=="" || person.gen=="" || person.desc==""){
+            return
+        }
+        else{
         var request = store.add(person);
-        addToDatabase(person)
+        }
 
         request.onerror = function (e) {
             console.warn("Error", e.target.error.name);
@@ -81,44 +85,9 @@ let idbSupported = false
         }
     }
 
-    function addToDatabase(newCoin)
-{
- let listofCoin;
- if(localStorage.getItem('coins') == null)
- {
-  listofCoin = [];
- }
- else
- {
-  listofCoin = JSON.parse(localStorage.getItem('coins'));
- }
- listofCoin.push(newCoin);
-  localStorage.setItem('coins', JSON.stringify(listofCoin));
- 
-}
-
+    
     // function displayData() {
     //     var transaction = db.transaction(['firstOS'], "readonly");
     //     var objectStore = transaction.objectStore('firstOS');
         
-    //     objectStore.openCursor().onsuccess = function(event) {
-    //         var cursor = event.target.result;
-    //       if(cursor) {
-              
-    //         // var listItem = document.createElement('li');
-    //         // listItem.innerHTML = cursor.value.name + ', ' + cursor.value.email;
-    //         // list.appendChild(listItem);
-    //         document.getElementById("cont").innerHTML+=`
-    //         <div alt="" class="" ></div><h3 id="name1" class="u-custom-font u-font-oswald ">${cursor.value.name}</h3>
-    //           <p class="u-text u-text-palette-2-base u-texts" id="id1">${cursor.value.id}</p>
-    //           <p class="" id="desc1">${cursor.value.desc}</p>`;
-    //         // document.getElementById("name1").innerHTML=cursor.value.name;
-    //         // document.getElementById("id1").innerHTML=cursor.value.id;
-    //         // document.getElementById("desc1").innerHTML=cursor.value.desc;
-      
-    //         cursor.continue();
-    //       } else {
-    //         console.log('Entries all displayed.');
-    //       }
-    //     };
-    //   }
+    

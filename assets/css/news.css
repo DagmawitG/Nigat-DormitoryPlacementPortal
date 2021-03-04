@@ -7,3 +7,9 @@ div div h3{
 .date{
     font-family: cursive;
 }
+#viewp{
+    size: 7rem;
+    margin-top: 20px;
+    background-color: rgb(119, 154, 230);
+    text-align: center;
+}

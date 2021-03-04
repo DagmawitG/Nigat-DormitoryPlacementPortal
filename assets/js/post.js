@@ -1,7 +1,7 @@
 // // import fiveKiloStudents from './algorithm.js'
 
 const post = document.querySelector('#post')
-let students = loadfromDB();
+let st = loadfromDB();
 
 let fkilo = 4; //Number of available dorm spaces in 5-kilo
 let skilo = 20; // Number of available dorm spaces in 6-kilo
@@ -12,50 +12,50 @@ let fbepd = 2; //Number of students assigned per dorm at fbe
 
 
 
-students.sort(compareNames); //sort the student list alphabetically
+st.sort(compareNames); //sort the student list alphabetically
 
 // Filter out students who are 5th year to be assigned to 5-kilo
 var fkilo_students = [];
 var rStudents = []; //remaining students who haven't been assigned yet
-for (var i = 0; i < students.length; i++) {
-  if (students[i].Year == 5 && fkilo_students.length < fkilo) {
-    fkilo_students.push(students[i]);
+for (var i = 0; i < st.length; i++) {
+  if (st[i].Year == 5 && fkilo_students.length < fkilo) {
+    fkilo_students.push(st[i]);
   } else {
-    rStudents.push(students[i]);
+    rStudents.push(st[i]);
   }
 }
 
-students = cloneArray(rStudents, students);
-students.sort(compareNames);
+st = cloneArray(rStudents, st);
+st.sort(compareNames);
 rStudents = []
 
 // Check if there are spaces left in 5-kilo after 5th years have been assigned
 if (fkilo - fkilo_students.length > 0) {
     let spacesLeft = fkilo - fkilo_students.length;
-    for (var i = 0; i < students.length; i++) {
+    for (var i = 0; i < st.length; i++) {
       if (spacesLeft > 0) {
-        if (students[i].Year == 4) {
-          fkilo_students.push(students[i]);
+        if (st[i].Year == 4) {
+          fkilo_students.push(st[i]);
           spacesLeft--;
         } else {
-          rStudents.push(students[i]);
+          rStudents.push(st[i]);
         }
       } else {
-        rStudents.push(students[i]);
+        rStudents.push(st[i]);
       }
     }
   }
 
   let mStudents = [];
 let fStudents = [];
-students = cloneArray(rStudents, students);
+st = cloneArray(rStudents, st);
 
 //list out female and male students who aren't assigned yet
-for (var i = 0; i < students.length; i++) {
-  if (students[i].gen == "M") {
-    mStudents.push(students[i]); //male students assigned to 6-kilo
+for (var i = 0; i < st.length; i++) {
+  if (st[i].gen == "M") {
+    mStudents.push(st[i]); //male students assigned to 6-kilo
   } else {
-    fStudents.push(students[i]); //female students assigned to FBE
+    fStudents.push(st[i]); //female students assigned to FBE
   }
 }
 
@@ -74,7 +74,7 @@ sixKiloStudents = assign(mStudents, skilopd);
 // console.log(fbeStudents);
 // console.log(sixKiloStudents);
 
-console.log(students);
+console.log(st);
 
 display(fiveKiloStudents, "5-kilo campus");
 display(fbeStudents, "FBE campus");
@@ -147,17 +147,14 @@ function assign(list, pd) {
 function display(array, campusName) {
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < array[i].length; j++) {
-        console.log(
-          array[i][j].name +
-            " has been assigned to dorm number " +
-            (parseInt(i) + 1) +
-            " at " +
-            campusName
-        );
-        post.innerHTML+=`->  ${array[i][j].name.toUpperCase()}` + ` has been assigned to dorm number ` + `${(parseInt(i) + 1)}` + ` at ` + `${campusName}<br><br>`
+       
+          array[i][j].dno = (parseInt(i) + 1) 
+      
+        post.innerHTML+=`<div class="card" style="padding:8px;">
+        <p class="strong">${array[i][j].name.toUpperCase()}</p>` + ` has been assigned to dorm number ` + `${(parseInt(i) + 1)}` + ` at ` + `${campusName}</div><br>`
       }
     }
-  }
+  };
 // // dis()
 // function dis(){
 //     var j = 0;

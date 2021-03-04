@@ -30,7 +30,7 @@ let idbSupported = false
             console.log(e.target)
         
             // displayData();
-            document.querySelector("#addButton").addEventListener("click", addPerson, false);
+            document.querySelector("#addButton").addEventListener("click", addPerson);
         }
         openRequest.onerror = function (e) {
             console.log("Error");
@@ -64,6 +64,7 @@ let idbSupported = false
             camp: camp,
             created: new Date()
         }
+        console.log(person)
 
 
         //Perform the add
